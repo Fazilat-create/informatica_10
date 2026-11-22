@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Путь к файлу — практическая работа</title>
+<meta name="description" content="Практическая работа по информатике, 10 класс: файловая система, путь к файлу">
+<meta name="theme-color" content="#6C4CE0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg:#FBF7F2; --card:#FFFFFF; --ink:#2B2440; --ink2:#5D5672; --line:#ECE4DA;
+  --violet:#6C4CE0; --violet-d:#4F33B8; --violet-s:#EFEAFF;
+  --coral:#FF7A59; --coral-d:#C9482A; --coral-s:#FFEBE4;
+  --mint:#1F9E85; --mint-s:#DDF5EE; --amber:#F2A900; --amber-s:#FFF4D1;
+  --r:20px; --shadow:0 6px 24px rgba(60,40,120,.08);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:17px;line-height:1.5}
+h1,h2,h3{font-family:'Unbounded','Nunito',system-ui,sans-serif;line-height:1.2;margin:0}
+h1{font-size:clamp(26px,5vw,40px);font-weight:700}
+h2{font-size:clamp(21px,3.6vw,28px);font-weight:700}
+h3{font-size:18px;font-weight:500}
+p{margin:0}
+b{font-weight:800}
+a{color:var(--violet-d)}
+kbd{font-family:inherit;font-size:.85em;font-weight:800;background:#fff;border:1.5px solid var(--line);border-bottom-width:3px;border-radius:7px;padding:1px 7px;white-space:nowrap}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;background:var(--violet-s);color:var(--violet-d);padding:2px 6px;border-radius:6px}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.wrap{max-width:880px;margin:0 auto;padding:0 16px}
+
+/* Header */
+header.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 4px 16px rgba(60,40,120,.06)}
+.topbar{display:flex;align-items:center;gap:12px;min-height:60px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand img{height:34px;width:auto;display:block}
+.brand .txtlogo{font-family:'Unbounded',sans-serif;font-weight:700;font-size:15px;color:var(--violet);background:var(--violet-s);padding:6px 12px;border-radius:999px}
+.brand .sub{font-size:14px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.devchip{margin-left:auto;display:none;align-items:center;gap:6px;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:700;white-space:nowrap}
+.devchip.show{display:flex}
+.devchip svg{width:18px;height:18px}
+.progress{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin:0 0 10px}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--coral));border-radius:6px;transition:width .4s}
+.steps{position:relative;display:flex;gap:6px;overflow-x:auto;padding:0 0 10px;scrollbar-width:none}
+.steps::-webkit-scrollbar{display:none}
+.steps button{flex:none;border:0;background:transparent;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:700;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.steps button .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--line);font-size:12px;color:var(--ink)}
+.steps button.done .n{background:var(--mint);color:#fff}
+.steps button.cur{background:var(--violet-s);color:var(--violet-d)}
+.steps button.cur .n{background:var(--violet);color:#fff}
+.steps button:disabled{opacity:.45;cursor:default}
+
+/* Screens */
+main.wrap{padding-top:24px;padding-bottom:calc(150px + env(safe-area-inset-bottom))}
+.screen{display:none;animation:in .35s ease}
+.screen.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:800;color:var(--coral-d);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.eyebrow .time{color:var(--ink2);background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:2px 10px;text-transform:none;letter-spacing:0;font-weight:700}
+.lead{font-size:18px;color:var(--ink2);margin-top:10px;max-width:640px}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:22px;margin-top:18px}
+.card.soft{background:var(--violet-s);box-shadow:none}
+.card.coral{background:var(--coral-s);box-shadow:none}
+.card.mint{background:var(--mint-s);box-shadow:none}
+.card.amber{background:var(--amber-s);box-shadow:none}
+.card h3{margin-bottom:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+@media (max-width:720px){.hero{grid-template-columns:1fr}.hero .art{display:none}}
+.hero .art{display:grid;place-items:center}
+.plan{display:grid;gap:8px;margin-top:6px}
+.plan li{list-style:none;display:flex;gap:12px;align-items:center;font-weight:700}
+.plan{padding:0;margin:0}
+.plan .t{margin-left:auto;font-weight:600;color:var(--ink2);font-size:15px;white-space:nowrap}
+.plan .ic{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#fff}
+.plan .ic svg{width:20px;height:20px}
+
+/* Inputs */
+label.f{display:block;margin-top:14px}
+label.f>span.l{display:block;font-weight:800;margin-bottom:6px}
+label.f>span.h{display:block;font-size:14px;color:var(--ink2);margin:-2px 0 6px}
+input[type=text],input[type=number],select,textarea{width:100%;border:2px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;font-size:16px;outline:none;transition:border-color .2s,box-shadow .2s}
+textarea{min-height:96px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--violet);box-shadow:0 0 0 4px var(--violet-s)}
+input:disabled{background:#F5F1EC;color:var(--ink2)}
+.nf{display:inline-flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;color:var(--ink2);cursor:pointer;user-select:none}
+.nf input{width:18px;height:18px;accent-color:var(--violet)}
+.unit{position:relative}
+.unit input{padding-right:52px}
+.unit::after{content:attr(data-u);position:absolute;right:14px;top:50%;transform:translateY(-50%);font-weight:800;color:var(--ink2);pointer-events:none}
+
+/* Device picker */
+.devs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
+@media (min-width:760px){.devs{grid-template-columns:repeat(3,1fr)}}
+.dev{position:relative;text-align:left;border:2.5px solid var(--line);background:#fff;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px;min-height:132px;transition:border-color .2s,transform .15s,box-shadow .2s}
+.dev:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.dev svg{width:40px;height:40px;color:var(--violet)}
+.dev b{font-size:16px;line-height:1.25}
+.dev small{color:var(--ink2);font-size:14px;line-height:1.3}
+.dev.sel{border-color:var(--violet);background:var(--violet-s)}
+.dev.sel::after{content:"✓";position:absolute;right:12px;top:10px;width:28px;height:28px;border-radius:50%;background:var(--violet);color:#fff;display:grid;place-items:center;font-weight:800}
+.dev .guess{align-self:flex-start;margin-top:auto;font-size:12px;font-weight:800;color:var(--coral-d);background:var(--coral-s);padding:2px 8px;border-radius:999px}
+.dev.sel .guess{display:none}
+
+/* How-to steps */
+.howto{counter-reset:s;display:grid;gap:10px;margin:0;padding:0}
+.howto li{list-style:none;position:relative;padding:12px 14px 12px 52px;background:#fff;border-radius:14px;border:1.5px solid var(--line)}
+.howto li::before{counter-increment:s;content:counter(s);position:absolute;left:12px;top:11px;width:28px;height:28px;border-radius:50%;background:var(--violet);color:#fff;font-weight:800;display:grid;place-items:center;font-size:14px}
+.card.soft .howto li{border-color:transparent}
+details.cheat{margin-top:18px;border-radius:var(--r);background:var(--amber-s);padding:0 18px}
+details.cheat summary{cursor:pointer;font-weight:800;padding:14px 0;list-style:none;display:flex;align-items:center;gap:10px}
+details.cheat summary::-webkit-details-marker{display:none}
+details.cheat summary::after{content:"＋";margin-left:auto;font-size:20px;color:var(--ink2)}
+details.cheat[open] summary::after{content:"－"}
+details.cheat .body{padding:0 0 16px;display:grid;gap:10px}
+.term{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.term .em{width:38px;height:38px;border-radius:12px;background:#fff;display:grid;place-items:center}
+.term .em svg{width:22px;height:22px;color:var(--coral-d)}
+
+/* Memory bar */
+.membar{margin-top:16px;display:none}
+.membar.show{display:block}
+.membar .bar{height:22px;border-radius:12px;background:var(--mint-s);overflow:hidden;display:flex}
+.membar .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--violet),var(--coral));transition:width .5s}
+.membar p{margin-top:8px;font-weight:700}
+
+/* Browser facts */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.fact{background:#fff;border-radius:16px;padding:14px 16px;border:1.5px solid var(--line)}
+.fact small{display:block;color:var(--ink2);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.fact b{display:block;font-size:19px;margin-top:4px;word-break:break-word}
+.choices{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.pill{border:2px solid var(--line);background:#fff;border-radius:999px;padding:10px 16px;font-weight:700;min-height:44px}
+.pill.sel{border-color:var(--violet);background:var(--violet);color:#fff}
+.pill.yes.sel{border-color:var(--mint);background:var(--mint)}
+.pill.no.sel{border-color:var(--coral-d);background:var(--coral-d)}
+.pill.idk.sel{border-color:var(--ink2);background:var(--ink2)}
+
+/* Classification quiz */
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:640px){.cats{grid-template-columns:1fr}}
+.cat{border-radius:16px;padding:14px;color:var(--ink)}
+.cat b{display:block;margin-bottom:4px}
+.cat p{font-size:14px;color:var(--ink2)}
+.c-sys{background:#E7F0FF}.c-app{background:var(--coral-s)}.c-dev{background:var(--mint-s)}
+.qlist{display:grid;gap:10px;margin-top:16px}
+.qi{background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 16px;transition:border-color .2s}
+.qi .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.qi .nm{font-weight:800;font-size:17px;flex:1 1 180px}
+.qi .opts{display:flex;gap:8px;flex-wrap:wrap}
+.qi .opts button{border:2px solid var(--line);background:#fff;border-radius:12px;padding:8px 12px;font-weight:700;font-size:15px;min-height:42px}
+.qi .opts button:disabled{cursor:default}
+.qi.ok{border-color:var(--mint);background:#F4FCF9}
+.qi.bad{border-color:var(--coral);background:#FFF8F5}
+.qi .opts button.pick-ok{background:var(--mint);border-color:var(--mint);color:#fff}
+.qi .opts button.pick-bad{background:var(--coral-d);border-color:var(--coral-d);color:#fff}
+.qi .opts button.right{border-color:var(--mint);color:var(--mint)}
+.qi .why{display:none;margin-top:10px;font-size:15px;color:var(--ink2)}
+.qi.ok .why,.qi.bad .why{display:block}
+.score{display:flex;align-items:center;gap:14px;margin-top:16px;font-weight:800}
+.score .big{font-family:'Unbounded',sans-serif;font-size:30px;color:var(--violet)}
+
+/* Apps table */
+.apps{display:grid;gap:12px;margin-top:6px}
+.app{display:grid;grid-template-columns:32px 1.3fr 1fr 1.2fr 36px;gap:10px;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:10px}
+.app .num{width:32px;height:32px;border-radius:10px;background:var(--violet-s);color:var(--violet-d);display:grid;place-items:center;font-weight:800}
+.app input,.app select{padding:10px 12px;border-radius:12px}
+.app .del{border:0;background:transparent;font-size:22px;color:var(--ink2);width:36px;height:36px;border-radius:10px}
+.app .del:hover{background:var(--coral-s);color:var(--coral-d)}
+@media (max-width:700px){.app{grid-template-columns:32px 1fr 36px}.app .c2,.app .c3{grid-column:2 / 4}}
+.addbtn{border:2px dashed var(--line);background:transparent;border-radius:16px;padding:12px;font-weight:800;color:var(--violet-d);width:100%;min-height:48px}
+.tally{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.tally span{border-radius:999px;padding:6px 12px;font-weight:800;font-size:14px}
+
+/* Health */
+.hq{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}
+.hq .q{display:flex;gap:12px;align-items:flex-start}
+.hq .q .ic{flex:none;width:40px;height:40px;border-radius:12px;background:var(--violet-s);display:grid;place-items:center}
+.hq .q .ic svg{width:22px;height:22px;color:var(--violet-d)}
+.hq .q b{display:block;font-size:17px}
+.hq .where{font-size:15px;color:var(--ink2);margin-top:4px}
+.hq .tip{display:none;margin-top:12px;padding:12px 14px;border-radius:14px;background:var(--coral-s);font-size:15px}
+.hq.need-tip .tip{display:block}
+.hq .auto{font-size:14px;font-weight:700;color:var(--mint);margin-top:6px}
+.meter{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.ring{--p:0;width:110px;height:110px;border-radius:50%;background:conic-gradient(var(--mint) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center;flex:none}
+.ring::before{content:"";grid-area:1/1;width:84px;height:84px;border-radius:50%;background:#fff}
+.ring b{grid-area:1/1;font-family:'Unbounded',sans-serif;font-size:22px;z-index:1}
+
+/* Bonus */
+.bonus-head{display:flex;gap:14px;align-items:center}
+.star{width:52px;height:52px;flex:none;border-radius:16px;background:var(--amber);display:grid;place-items:center}
+.star svg{width:30px;height:30px;color:#fff}
+
+/* Nav */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(60,40,120,.10);padding:12px 0 calc(12px + env(safe-area-inset-bottom))}
+.nav .wrap{display:flex;gap:12px;align-items:center}
+.btn{border:0;border-radius:16px;padding:14px 22px;font-weight:800;font-size:16px;min-height:52px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .1s,background .2s}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--violet);color:#fff;margin-left:auto}
+.btn.primary:hover{background:var(--violet-d)}
+.btn.ghost{background:#fff;border:2px solid var(--line);color:var(--ink)}
+.btn.coral{background:var(--coral-d);color:#fff}
+.btn.mint{background:var(--mint);color:#fff}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.navhint{font-size:14px;color:var(--ink2);font-weight:700}
+@media (max-width:480px){.navhint{display:none}.nav .btn{flex:1;padding:14px 12px}}
+
+/* Report */
+.rep{background:#fff;border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-top:18px}
+.rep .rh{background:linear-gradient(120deg,var(--violet),#8E6CF0 60%,var(--coral));color:#fff;padding:22px}
+.rep .rh h3{font-size:20px}
+.rep .rh p{opacity:.92;margin-top:6px}
+.rep .rb{padding:8px 22px 22px}
+.rep section{padding:14px 0;border-bottom:1px solid var(--line)}
+.rep section:last-child{border-bottom:0}
+.rep h4{margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--coral-d)}
+.rep dl{display:grid;grid-template-columns:minmax(120px,auto) 1fr;gap:4px 14px;margin:0}
+.rep dt{color:var(--ink2)}
+.rep dd{margin:0;font-weight:700;word-break:break-word}
+.rep .miss{color:var(--coral-d);font-weight:700}
+.actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:18px}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-weight:700;opacity:0;pointer-events:none;transition:.3s;z-index:50;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.missing{display:grid;gap:8px;margin-top:10px}
+.missing button{text-align:left;border:0;background:#fff;border-radius:12px;padding:10px 14px;font-weight:700;color:var(--coral-d)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--violet-s);color:var(--violet-d);border-radius:999px;padding:4px 12px;font-weight:700;font-size:14px}
+.chiptable{width:100%;border-collapse:collapse;font-size:15px;margin-top:8px}
+.chiptable td{padding:6px 8px;border-bottom:1px solid rgba(0,0,0,.06)}
+.chiptable td:last-child{font-weight:800}
+.small{font-size:14px;color:var(--ink2)}
+.mt{margin-top:14px}
+.reset{background:none;border:0;color:var(--ink2);text-decoration:underline;font-size:14px;margin-top:24px;padding:8px 0}
+
+/* ===== Компьютеры и ноутбуки: на всю ширину ===== */
+@media (min-width:1100px){
+  .wrap{max-width:1440px;padding:0 40px}
+  body{font-size:18px}
+  .steps{flex-wrap:wrap;overflow:visible}
+  .devs{grid-template-columns:repeat(5,1fr)}
+  .startgrid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:28px;align-items:center}
+  .startgrid>.card{margin-top:0}
+  .plan{grid-template-columns:1fr 1fr;column-gap:40px}
+  .split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:28px;align-items:start}
+  .split .sticky{position:sticky;top:150px}
+  .qlist.two{grid-template-columns:1fr 1fr}
+  #hlist{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+  #bonus-dev{display:grid;grid-template-columns:repeat(3,1fr);gap:0 24px}
+  #bonus-dev .grid2{grid-template-columns:1fr}
+  .repgrid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:28px;align-items:start}
+  .repgrid>*{grid-column:2}
+  .repgrid>.rep{grid-column:1;grid-row:1 / span 5;margin-top:18px}
+  .lead{max-width:960px}
+}
+@media (min-width:1600px){.wrap{max-width:1600px}}
+
+/* ===== Телефон: когда открыта экранная клавиатура ===== */
+body.typing .nav{display:none}
+body.typing header.top{position:static;box-shadow:none}
+body.typing main.wrap{padding-bottom:45vh}
+.pdfbtn{text-decoration:none;margin-top:18px}
+
+@media print{
+  header.top,.nav,.screen:not(#s-report),.no-print,.toast{display:none!important}
+  body{background:#fff}
+  #s-report{display:block!important}
+  .rep{box-shadow:none;border:1px solid #ddd}
+  main{padding:0}
+}
+
+
+.task-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:18px}
+.task-actions .left{font-weight:700;color:var(--ink2);font-size:15px}
+.mi{background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 16px;display:grid;grid-template-columns:1fr minmax(200px,260px);gap:12px;align-items:center}
+@media (max-width:640px){.mi{grid-template-columns:1fr}}
+.mi p{font-size:16px}
+.mi.ok{border-color:var(--mint);background:#F4FCF9}
+.mi.bad{border-color:var(--coral);background:#FFF8F5}
+.mi .why{display:none;grid-column:1/-1;font-size:15px;color:var(--ink2)}
+.mi.ok .why,.mi.bad .why{display:block}
+.ch{background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 16px}
+.ch .q{font-weight:800;font-size:17px;margin-bottom:10px}
+.ch .q small{display:block;font-weight:600;color:var(--ink2);font-size:14px;margin-bottom:4px}
+.ch .opts{display:flex;flex-wrap:wrap;gap:8px}
+.ch .opts button{border:2px solid var(--line);background:#fff;border-radius:12px;padding:9px 14px;font-weight:700;font-size:15px;min-height:44px;text-align:left}
+.ch .opts button.sel{border-color:var(--violet);background:var(--violet-s);color:var(--violet-d)}
+.ch .opts button:disabled{cursor:default}
+.ch .opts button.pick-ok{background:var(--mint);border-color:var(--mint);color:#fff}
+.ch .opts button.pick-bad{background:var(--coral-d);border-color:var(--coral-d);color:#fff}
+.ch .opts button.right{border-color:var(--mint);color:var(--mint)}
+.ch.ok{border-color:var(--mint);background:#F4FCF9}
+.ch.bad{border-color:var(--coral);background:#FFF8F5}
+.ch .why{display:none;margin-top:10px;font-size:15px;color:var(--ink2)}
+.ch.ok .why,.ch.bad .why{display:block}
+.ch.col .opts{flex-direction:column}
+.ch.col .opts button{width:100%}
+.ord{display:grid;gap:10px;margin-top:14px}
+.oi{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:16px;padding:10px 12px;transition:transform .2s}
+.oi .n{width:36px;height:36px;border-radius:10px;background:var(--violet-s);color:var(--violet-d);display:grid;place-items:center;font-weight:800}
+.oi .mv{display:flex;gap:6px}
+.oi .mv button{width:44px;height:44px;border-radius:12px;border:2px solid var(--line);background:#fff;font-size:18px;font-weight:800}
+.oi .mv button:disabled{opacity:.3;cursor:default}
+.oi.ok{border-color:var(--mint);background:#F4FCF9}
+.oi.bad{border-color:var(--coral);background:#FFF8F5}
+.oi.ok .n{background:var(--mint);color:#fff}
+.oi.bad .n{background:var(--coral-d);color:#fff}
+.checks{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.checks label{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--line);border-radius:999px;padding:8px 14px;background:#fff;font-weight:700;cursor:pointer;min-height:44px}
+.checks input{width:18px;height:18px;accent-color:var(--violet)}
+.rubric{display:grid;gap:8px;margin-top:6px}
+.rubric div{display:flex;gap:10px;align-items:flex-start}
+.rubric b.pt{flex:none;min-width:58px;text-align:center;background:#fff;border-radius:999px;padding:2px 8px;font-size:14px}
+.totals{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.totals .t{background:#fff;border-radius:16px;padding:14px 16px;border:1.5px solid var(--line)}
+.totals .t small{display:block;color:var(--ink2);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.totals .t b{font-family:'Unbounded',sans-serif;font-size:24px;color:var(--violet)}
+@media (min-width:1100px){
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mlist{grid-template-columns:1fr}
+}
+
+/* ===== Путь к файлу ===== */
+.brand .txtlogo{background:#F26722;color:#fff}
+.mono{font-family:ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace}
+.pathline{display:flex;flex-wrap:wrap;align-items:center;gap:4px;background:#1E1B2E;border-radius:16px;padding:16px;margin-top:12px}
+.seg{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:18px;font-weight:700;border:2px dashed #6E668A;color:#fff;background:transparent;border-radius:10px;padding:8px 10px;min-height:44px;display:inline-flex;flex-direction:column;align-items:center;gap:2px;line-height:1.1}
+.seg small{font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:#C9C2E0;min-height:14px}
+.seg.l0{border:2px solid #7AA7FF;background:#24345E}.seg.l1{border:2px solid #F2A900;background:#4A3A12}.seg.l2{border:2px solid #FF7A59;background:#55261B}.seg.l3{border:2px solid #39C3A5;background:#143F37}
+.seg.ok{box-shadow:0 0 0 3px #39C3A5}.seg.bad{box-shadow:0 0 0 3px #FF5A5A}
+.sep{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:22px;font-weight:800;color:#8E86AD}
+.palette{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.palette button{border:2.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:800;min-height:44px;display:inline-flex;align-items:center;gap:8px}
+.palette button i{width:14px;height:14px;border-radius:4px;display:inline-block}
+.palette button.sel{border-color:var(--violet);background:var(--violet-s)}
+.legend0{background:#7AA7FF}.legend1{background:#F2A900}.legend2{background:#FF7A59}.legend3{background:#39C3A5}
+/* дерево */
+.tree{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:16px;line-height:1.75;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;white-space:pre;overflow-x:auto}
+.tree b{font-weight:800;color:var(--violet-d)}
+/* проводник */
+.fm{background:#fff;border:2px solid var(--line);border-radius:18px;overflow:hidden;margin-top:12px}
+.fm .bar{display:flex;align-items:center;gap:8px;background:#F3EFFC;padding:10px 12px;border-bottom:1.5px solid var(--line)}
+.fm .bar button{border:2px solid var(--line);background:#fff;border-radius:10px;min-width:44px;height:40px;font-weight:800}
+.fm .bar button:disabled{opacity:.35}
+.fm .addr{flex:1;font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;font-size:15px;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;overflow-x:auto;white-space:nowrap}
+.fm ul{list-style:none;margin:0;padding:6px}
+.fm li button{width:100%;text-align:left;border:0;background:transparent;border-radius:10px;padding:10px 12px;font-size:16px;font-weight:700;display:flex;align-items:center;gap:10px;min-height:46px}
+.fm li button:hover{background:var(--violet-s)}
+.fm li button .ic{font-size:20px;width:26px;text-align:center}
+.fm li button .ext{margin-left:auto;font-size:13px;color:var(--ink2);font-weight:700}
+.fm .empty{padding:14px;color:var(--ink2)}
+.target{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}
+.target .goal{font-weight:800;font-size:17px}
+.target .st{font-size:14px;font-weight:800;border-radius:999px;padding:4px 10px}
+.st.wait{background:var(--line);color:var(--ink2)}.st.done{background:var(--mint);color:#fff}
+.found{margin-top:10px;background:var(--mint-s);border-radius:12px;padding:10px 14px;font-weight:700;word-break:break-all}
+.fmmsg{margin-top:8px;font-weight:700;font-size:15px;min-height:22px}
+.fmmsg.bad{color:var(--coral-d)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{border:2px solid var(--line);background:#fff;border-radius:12px;padding:8px 14px;font-weight:800;min-height:44px}
+.tabs button.cur{border-color:var(--violet);background:var(--violet);color:#fff}
+.tabs button.ok{border-color:var(--mint)}
+.inrow{display:flex;gap:8px;align-items:stretch}
+.inrow input{flex:1;font-family:ui-monospace,Menlo,Consolas,monospace}
+.inrow .bs{flex:none;border:2px solid var(--line);background:#fff;border-radius:14px;min-width:52px;font-family:ui-monospace,monospace;font-weight:800;font-size:20px}
+.res{margin-top:10px;border-radius:12px;padding:10px 14px;font-weight:700;display:none}
+.res.ok{display:block;background:var(--mint-s)}.res.bad{display:block;background:var(--coral-s)}
+.checks{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.checks label{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--line);border-radius:999px;padding:8px 14px;background:#fff;font-weight:700;cursor:pointer;min-height:44px}
+.checks label.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px}
+.checks input{width:18px;height:18px;accent-color:var(--violet)}
+.checks.locked label{cursor:default}
+.checks label.ok{border-color:var(--mint);background:#F4FCF9}
+.checks label.bad{border-color:var(--coral);background:#FFF8F5}
+.files{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.files span{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;font-weight:700;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:6px 10px}
+@media (min-width:1100px){.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}}
+@media (max-width:480px){.tree{font-size:12.5px;padding:12px}.seg{font-size:16px}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <img id="logo" src="logo.png" alt="Umaclass" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='../logo.png';}else{this.style.display='none';document.getElementById('txtlogo').style.display='inline-block';}">
+        <span id="txtlogo" class="txtlogo" style="display:none">Umaclass</span>
+        <span class="sub">Информатика · 10 класс</span>
+      </div>
+      <button class="devchip" id="devchip" type="button" title="Сменить устройство"></button>
+    </div>
+    <div class="progress"><i id="progbar"></i></div>
+    <nav class="steps" id="steps" aria-label="Шаги работы"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- 0. СТАРТ -->
+<section class="screen" id="s-start">
+  <div class="startgrid">
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Практическая работа <span class="time">≈ 30 минут</span></div>
+        <h1>Путь к файлу</h1>
+        <p class="lead">Каждый файл живёт по своему «адресу». Сегодня ты научишься читать и составлять такие адреса, найдёшь настоящие пути на своём устройстве и узнаешь, как правильно называть файлы.</p>
+        <a class="btn ghost pdfbtn" href="zadanie.pdf" download="Put_k_faylu_zadanie.pdf" target="_blank" rel="noopener">⬇ Скачать задание в PDF</a>
+      </div>
+      <div class="art" aria-hidden="true">
+        <svg width="250" height="200" viewBox="0 0 250 200" fill="none">
+          <path d="M20 40h50l12 12h70v80H20z" fill="#FFE1A8" stroke="#F2A900" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M110 100h40l10 10h56v66H110z" fill="#EFEAFF" stroke="#6C4CE0" stroke-width="4" stroke-linejoin="round"/>
+          <rect x="176" y="22" width="52" height="64" rx="8" fill="#fff" stroke="#FF7A59" stroke-width="4"/>
+          <path d="M188 42h28M188 54h28M188 66h18" stroke="#FF7A59" stroke-width="4" stroke-linecap="round"/>
+          <path d="M70 140c0 30 20 30 40 30M160 60c0-20 10-25 16-25" stroke="#1F9E85" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Давай знакомиться</h3>
+      <label class="f"><span class="l">Фамилия и имя</span><input type="text" id="name" data-k="name" placeholder="Иванова Мария" autocomplete="name" autocapitalize="words"></label>
+      <label class="f"><span class="l">Класс</span><input type="text" data-k="cls" placeholder="10 А"></label>
+    </div>
+  </div>
+  <div class="card coral" id="inapp" style="display:none">
+    <h3>Открой работу в обычном браузере</h3>
+    <p class="small" style="color:var(--ink)">Похоже, ссылка открылась внутри мессенджера. Там могут не сохраниться ответы и не скопироваться отчёт. Нажми <b>⋮</b> или <b>…</b> вверху и выбери <b>«Открыть в браузере»</b>.</p>
+  </div>
+  <div class="card">
+    <h3>С какого устройства ты сейчас работаешь?</h3>
+    <p class="small">В задании 3 ты будешь искать пути на своём устройстве — инструкция подстроится под него.</p>
+    <div class="devs" id="devs"></div>
+  </div>
+  <div class="card soft">
+    <h3>План работы</h3>
+    <ul class="plan" id="plan"></ul>
+    <p class="small mt">Всё, что ты вводишь, сохраняется в этом браузере. Если страница закроется — просто открой её снова.</p>
+  </div>
+</section>
+
+<!-- 1. АДРЕС ФАЙЛА -->
+<section class="screen" id="s-parts">
+  <div class="eyebrow">Задание 1 <span class="time">5 минут</span></div>
+  <h2>Из чего состоит адрес файла</h2>
+  <p class="lead">Полное имя файла — это путь к нему (диск и все папки по порядку) плюс имя самого файла.</p>
+  <div class="split">
+    <div class="card soft sticky">
+      <h3>Шпаргалка</h3>
+      <div class="rubric" style="display:grid;gap:10px">
+        <p><b>Файл</b> — именованная область памяти, где хранятся данные: текст, фото, программа.</p>
+        <p><b>Имя файла</b> состоит из двух частей: <span class="mono">доклад<b style="color:var(--coral-d)">.docx</b></span>. После точки — <b>расширение</b>: по нему система понимает, какой программой открыть файл.</p>
+        <p><b>Папка (каталог)</b> — «коробка» для файлов и других папок. Папки вложены друг в друга, как матрёшки, — получается <b>дерево</b>.</p>
+        <p><b>Корневой каталог</b> — самая верхняя папка диска. В Windows это <span class="mono">C:\</span>, в Android, macOS и Linux — просто <span class="mono">/</span>.</p>
+        <p><b>Путь</b> — цепочка папок от корня до файла. В Windows папки разделяет <span class="mono"><b>\</b></span>, в остальных системах — <span class="mono"><b>/</b></span>.</p>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Разметь полное имя файла</h3>
+        <p class="small">Выбери цвет-подпись, а потом нажимай на части адреса. Каждую часть нужно подписать.</p>
+        <div class="palette" id="palette"></div>
+        <div class="pathline" id="pathline"></div>
+        <div class="task-actions"><button class="btn primary" style="margin-left:0" id="segcheck" type="button">Проверить разметку</button><span class="left" id="segleft"></span></div>
+        <div class="res" id="segres"></div>
+      </div>
+      <div class="qlist" id="p1q"></div>
+      <div class="task-actions"><button class="btn primary" style="margin-left:0" id="p1check" type="button">Проверить ответы</button><span class="left" id="p1left"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. ПРОВОДНИК -->
+<section class="screen" id="s-nav">
+  <div class="eyebrow">Задание 2 <span class="time">8 минут</span></div>
+  <h2>Найди файл по дереву папок</h2>
+  <p class="lead">Это диск школьницы Алисы. Пройди по папкам, как в настоящем «Проводнике», и найди нужные файлы. Адресная строка будет показывать, где ты находишься.</p>
+  <div class="split">
+    <div class="card sticky">
+      <h3>Дерево папок диска C:</h3>
+      <div class="tree" id="tree"></div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="tabs" id="navtabs"></div>
+        <div class="target"><span class="goal" id="navgoal"></span><span class="st wait" id="navst"></span></div>
+        <div class="fm">
+          <div class="bar"><button type="button" id="fmup" aria-label="Наверх">⬆</button><div class="addr" id="fmaddr"></div></div>
+          <ul id="fmlist"></ul>
+        </div>
+        <p class="fmmsg" id="fmmsg"></p>
+        <div class="found" id="navfound" style="display:none"></div>
+      </div>
+      <div class="card">
+        <h3>А теперь без подсказок</h3>
+        <p>Посмотри на дерево и запиши <b>полное имя</b> файла <span class="mono"><b>плейлист.mp3</b></span>.</p>
+        <label class="f"><div class="inrow"><input type="text" data-k="typed" placeholder="C:\…" autocapitalize="off" autocorrect="off" spellcheck="false"><button class="bs" type="button" data-ins="typed">\</button></div></label>
+        <p class="small">На телефоне знака <span class="mono">\</span> часто нет на клавиатуре — нажми кнопку справа, она его вставит.</p>
+        <div class="task-actions"><button class="btn primary" style="margin-left:0" id="typedcheck" type="button">Проверить</button></div>
+        <div class="res" id="typedres"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. МОЁ УСТРОЙСТВО -->
+<section class="screen" id="s-mine">
+  <div class="eyebrow">Задание 3 <span class="time">9 минут</span></div>
+  <h2>Пути на моём устройстве</h2>
+  <p class="lead">Теперь — настоящие пути. Найди на своём устройстве папку «Загрузки» и любой файл в ней.</p>
+  <div class="split">
+    <div class="card soft sticky">
+      <h3>Как увидеть путь</h3>
+      <ol class="howto" id="minehow"></ol>
+      <p class="small mt" id="minenote"></p>
+    </div>
+    <div>
+      <div class="card">
+        <label class="f" style="margin-top:0"><span class="l">Путь к папке «Загрузки»</span><span class="h" id="dlhint"></span><input class="mono" type="text" data-k="dlpath" autocapitalize="off" autocorrect="off" spellcheck="false"></label>
+        <label class="f"><span class="l">Имя любого файла из «Загрузок» (вместе с расширением)</span><input type="text" data-k="fname" placeholder="Например: расписание.pdf" autocapitalize="off"></label>
+        <label class="f"><span class="l">Полное имя этого файла</span><span class="h">Путь + имя файла. Если устройство путь не показывает — напиши так, как оно показывает.</span><textarea class="mono" data-k="fpath" style="min-height:76px" autocapitalize="off" autocorrect="off" spellcheck="false"></textarea></label>
+        <label class="f"><span class="l">Сколько папок в этом пути (уровней вложенности)?</span><div class="unit" data-u="шт." style="max-width:200px"><input type="number" inputmode="numeric" min="0" data-k="levels"></div></label>
+        <p style="font-weight:800;margin-top:14px">Какой знак разделяет папки на твоём устройстве?</p>
+        <div class="choices" data-group="sepmine">
+          <button class="pill" type="button" data-v="\ (обратная косая черта)"><span class="mono">\</span>&nbsp;обратная черта</button>
+          <button class="pill" type="button" data-v="/ (косая черта)"><span class="mono">/</span>&nbsp;косая черта</button>
+          <button class="pill" type="button" data-v="путь не показывается полностью">путь не показывается</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Какие файлы лежат в «Загрузках»?</h3>
+        <p class="small">Отметь расширения, которые встретились. Подсказка: какой программой открывается каждый тип.</p>
+        <div class="checks" id="exts"></div>
+        <label class="f"><span class="l">Какой файл в «Загрузках» тебе больше не нужен? <span class="small">(можно удалить — это полезно!)</span></span><input type="text" data-k="junk" placeholder="Например: билет_в_кино.pdf"></label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ИМЕНА ФАЙЛОВ -->
+<section class="screen" id="s-names">
+  <div class="eyebrow">Задание 4 <span class="time">4 минуты</span></div>
+  <h2>Можно ли так назвать файл?</h2>
+  <p class="lead">В Windows в именах файлов нельзя использовать девять символов: <span class="mono"><b>\ / : * ? " &lt; &gt; |</b></span> — они заняты под пути и служебные команды. Пробелы, дефисы, скобки и русские буквы можно.</p>
+  <div class="qlist two-col" id="nmq"></div>
+  <div class="task-actions"><button class="btn primary" style="margin-left:0" id="nmcheck" type="button">Проверить</button><span class="left" id="nmleft"></span></div>
+  <div class="card mint score" id="nmscore" style="display:none"><span class="big"></span><span class="msg"></span></div>
+</section>
+
+<!-- 5. БОНУС -->
+<section class="screen" id="s-bonus">
+  <div class="bonus-head">
+    <span class="star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6L2.5 9.3l6.6-.8z"/></svg></span>
+    <div><div class="eyebrow" style="margin:0">Для тех, кто справился раньше</div><h2>Бонус: маски файлов</h2></div>
+  </div>
+  <p class="lead">Чтобы найти сразу много файлов, используют <b>маску</b>. В ней <span class="mono"><b>*</b></span> заменяет любое количество любых символов (даже ни одного), а <span class="mono"><b>?</b></span> — ровно один любой символ. Такие задачи бывают в ОГЭ и ЕГЭ.</p>
+  <div class="card amber">
+    <h3>Файлы в папке</h3>
+    <div class="files" id="mfiles"></div>
+  </div>
+  <div id="masks"></div>
+  <div class="card">
+    <h3>⭐ Где оказалась пользовательница?</h3>
+    <p>Пользовательница работала в каталоге <span class="mono"><b>C:\Учёба\Информатика\Практические</b></span>. Сначала она поднялась на два уровня вверх, затем спустилась в каталог <b>Литература</b>, а потом — в каталог <b>Сочинения</b>. Запиши полный путь каталога, в котором она оказалась.</p>
+    <label class="f"><div class="inrow"><input type="text" data-k="moved" placeholder="C:\…" autocapitalize="off" autocorrect="off" spellcheck="false"><button class="bs" type="button" data-ins="moved">\</button></div></label>
+    <div class="task-actions"><button class="btn primary" style="margin-left:0" id="movedcheck" type="button">Проверить</button></div>
+    <div class="res" id="movedres"></div>
+  </div>
+</section>
+
+<!-- 6. ОТЧЁТ -->
+<section class="screen" id="s-report">
+  <div class="eyebrow no-print">Финиш <span class="time">3 минуты</span></div>
+  <h2 class="no-print">Вывод и отчёт</h2>
+  <div class="repgrid">
+    <div class="card no-print">
+      <h3>Последний шаг — вывод</h3>
+      <label class="f" style="margin-top:0"><span class="l">Зачем нужно знать путь к файлу? Приведи пример из жизни.</span><textarea data-k="concl" placeholder="Например: когда прикрепляешь файл к письму или к заданию на Umaclass, нужно знать, в какой он папке…"></textarea></label>
+      <p style="font-weight:800;margin-top:16px">Как тебе работа?</p>
+      <div class="choices" data-group="mood">
+        <button class="pill" type="button" data-v="Всё было понятно и легко">Понятно и легко</button>
+        <button class="pill" type="button" data-v="Было интересно, но кое-что сложно">Интересно, но местами сложно</button>
+        <button class="pill" type="button" data-v="Было трудно, нужна помощь">Трудно, нужна помощь</button>
+      </div>
+    </div>
+    <div class="card coral no-print" id="missbox" style="display:none">
+      <h3>Почти готово! Не выполнено:</h3>
+      <div class="missing" id="misslist"></div>
+    </div>
+    <div class="rep" id="rep"></div>
+    <div class="card soft no-print">
+      <h3>Как сдать работу на Umaclass</h3>
+      <ol class="howto">
+        <li>Нажми <b>«Скопировать отчёт»</b>.</li>
+        <li>Открой на Umaclass задание «Практическая работа „Путь к файлу“».</li>
+        <li>Вставь текст в поле ответа: долгое нажатие → «Вставить» на телефоне или <kbd>Ctrl</kbd> + <kbd>V</kbd> на компьютере.</li>
+        <li>Если удобнее файлом — нажми <b>«Скачать файл»</b> и прикрепи его. Можно и скриншот отчёта.</li>
+      </ol>
+      <div class="actions">
+        <button class="btn mint" id="copyrep" type="button">Скопировать отчёт</button>
+        <button class="btn ghost" id="dlrep" type="button">Скачать файл</button>
+        <button class="btn ghost" id="printrep" type="button">Сохранить как PDF</button>
+        <a class="btn coral" id="umalink" href="#" target="_blank" rel="noopener" style="display:none;text-decoration:none">Открыть Umaclass</a>
+      </div>
+    </div>
+    <a class="btn ghost pdfbtn no-print" href="zadanie.pdf" download="Put_k_faylu_zadanie.pdf" target="_blank" rel="noopener" style="width:100%">⬇ Скачать задание в PDF</a>
+    <button class="reset no-print" id="reset" type="button">Начать работу заново (всё стереть)</button>
+  </div>
+</section>
+
+</main>
+
+<div class="nav">
+  <div class="wrap">
+    <button class="btn ghost" id="prev" type="button">← Назад</button>
+    <span class="navhint" id="navhint"></span>
+    <button class="btn primary" id="next" type="button">Начать →</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ===== Настройки для учителя ===== */
+const CONFIG = {
+  umaclassUrl: "",          // ссылка на задание в Umaclass; пусто — кнопка скрыта
+  storageKey: "put-k-faylu-pr-v1"
+};
+
+const ICON = {
+  laptop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="11" rx="2"/><path d="M2 19h20"/></svg>',
+  phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg>',
+  monitor:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="13" rx="2"/><path d="M8 21h8M12 16v5"/></svg>'
+};
+const DEV = {
+  win:{label:"Компьютер или ноутбук с Windows",short:"Windows",sub:"Windows 10 или 11",icon:"laptop"},
+  mac:{label:"MacBook или iMac",short:"macOS",sub:"компьютер Apple",icon:"laptop"},
+  android:{label:"Телефон или планшет Android",short:"Android",sub:"Samsung, Xiaomi, Honor…",icon:"phone"},
+  ios:{label:"iPhone или iPad",short:"iPhone / iPad",sub:"устройство Apple",icon:"phone"},
+  other:{label:"Другое устройство",short:"Другое",sub:"Linux, Chromebook…",icon:"monitor"}
+};
+const MINE = {
+  win:{steps:["Открой <b>Проводник</b> (клавиши <kbd>Win</kbd> + <kbd>E</kbd>) и слева выбери <b>«Загрузки»</b>.","Щёлкни по пустому месту в <b>адресной строке</b> вверху окна — вместо «Этот компьютер › Загрузки» появится настоящий путь.","Полное имя файла: выдели файл и нажми <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> (Windows 11) или зажми <kbd>Shift</kbd>, нажми правой кнопкой → <b>«Копировать как путь»</b>. Потом вставь в поле: <kbd>Ctrl</kbd> + <kbd>V</kbd>."],
+       note:"Интересно: Windows показывает папку как «Загрузки», а на самом деле она называется Downloads. Это русское «отображаемое» имя для удобства.",dl:"Например: C:\\Users\\Мария\\Downloads"},
+  mac:{steps:["Открой <b>Finder</b> и слева выбери <b>«Загрузки»</b>.","Включи строку пути: меню <b>Вид</b> → <b>Показать строку пути</b>. Внизу окна появится цепочка папок.","Полное имя файла: выдели файл и нажми <kbd>⌥ Option</kbd> + <kbd>⌘</kbd> + <kbd>C</kbd> — путь скопируется. Вставь в поле: <kbd>⌘</kbd> + <kbd>V</kbd>."],
+       note:"В macOS, как и в Linux, папки разделяются знаком /, а корень диска — это просто /.",dl:"Например: /Users/maria/Downloads"},
+  android:{steps:["Открой приложение для файлов: <b>«Файлы»</b> (Google), <b>«Мои файлы»</b> (Samsung) или <b>«Проводник»</b> (Xiaomi).","Открой папку <b>«Загрузки»</b> (Download). Нажми и подержи любой файл → <b>⋮</b> → <b>«Сведения»</b>, <b>«Свойства»</b> или <b>«Информация о файле»</b>.","Найди строку <b>«Путь»</b> или <b>«Расположение»</b> — это и есть адрес файла."],
+       note:"Путь начинается примерно так: /storage/emulated/0/ — это «внутренняя память» телефона. Android построен на Linux, поэтому разделитель — /.",dl:"Например: /storage/emulated/0/Download"},
+  ios:{steps:["Открой приложение <b>«Файлы»</b> → вкладка <b>«Обзор»</b> → <b>«На iPhone»</b> (или <b>iCloud Drive</b>) → <b>«Загрузки»</b>.","Нажми и подержи любой файл → <b>«Свойства»</b> (или <b>«Информация»</b>).","В строке <b>«Где»</b> показано, в какой папке лежит файл, например «На iPhone › Загрузки»."],
+       note:"iPhone прячет полный «компьютерный» путь — это нормально. Запиши путь так, как его показывает iPhone, заменив стрелки › на /.",dl:"Например: На iPhone/Загрузки"},
+  other:{steps:["Открой файловый менеджер (в Linux — «Файлы», в ChromeOS — «Файлы»).","Найди папку «Загрузки» (Downloads).","Посмотри путь в адресной строке или в свойствах файла."],note:"В Linux и ChromeOS разделитель — /.",dl:"Например: /home/maria/Downloads"}
+};
+const EXTS = [[".pdf","документ PDF"],[".docx","Word"],[".xlsx","таблица"],[".pptx","презентация"],[".jpg",".jpg — фото"],[".png","картинка"],[".mp4","видео"],[".mp3","музыка"],[".zip","архив"],[".apk","установщик Android"],[".exe","программа Windows"],[".txt","текст"]];
+
+/* --- Задание 1 --- */
+const LABELS = ["Диск (корень)","Папка","Имя файла","Расширение"];
+const SEGS = [["C:",0],["Учёба",1],["Информатика",1],["Практические",1],["путь_к_файлу",2],[".docx",3]];
+const P1Q = [
+  {q:"Сколько папок нужно открыть, чтобы добраться до файла путь_к_файлу.docx?",o:["2","3","4"],a:1,w:"Учёба → Информатика → Практические: три папки (три уровня вложенности)."},
+  {q:"Какой знак разделяет папки в пути Windows?",o:["\\","/","|"],a:0,w:"В Windows — обратная косая черта \\."},
+  {q:"А в Android, macOS и Linux?",o:["\\","/",":"],a:1,w:"В этих системах — косая черта /. Корень диска тоже обозначается просто /."},
+  {q:"Какой программой откроется файл с расширением .docx?",o:["Текстовым редактором","Фоторедактором","Музыкальным плеером"],a:0,w:"Расширение .docx — документ Word или другого текстового редактора."}
+];
+/* --- Задание 2: диск Алисы --- */
+const FS = {n:"C:",c:[
+  {n:"Учёба",c:[{n:"Информатика",c:[{n:"Практические",c:[{n:"путь_к_файлу.docx"},{n:"мой_компьютер.docx"}]},{n:"доклад_ПО.pptx"}]},{n:"Литература",c:[{n:"Сочинения",c:[{n:"Онегин.docx"}]},{n:"список_книг.txt"}]},{n:"расписание.xlsx"}]},
+  {n:"Фото",c:[{n:"Лето 2026",c:[{n:"море.jpg"},{n:"закат.jpg"}]},{n:"аватарка.png"}]},
+  {n:"Музыка",c:[{n:"плейлист.mp3"}]}
+]};
+const TARGETS = [["Фото","аватарка.png"],["Фото","Лето 2026","закат.jpg"],["Учёба","Литература","Сочинения","Онегин.docx"]];
+const TYPED_ANS = "C:\\Музыка\\плейлист.mp3";
+/* --- Задание 4 --- */
+const NAMES = [
+  {q:"доклад_итог.docx",a:0,w:"Можно: подчёркивание разрешено."},
+  {q:"вопрос?.txt",a:1,w:"Нельзя: знак ? используется в масках файлов."},
+  {q:"фото 2026.jpg",a:0,w:"Можно: пробелы в именах разрешены."},
+  {q:"план:май.docx",a:1,w:"Нельзя: двоеточие обозначает диск — как в C:"},
+  {q:"сочинение (черновик).docx",a:0,w:"Можно: скобки разрешены."},
+  {q:"7/8 класс.xlsx",a:1,w:"Нельзя: / — разделитель папок, система решит, что «7» — это папка."}
+];
+/* --- Бонус --- */
+const MFILES = ["report.doc","report.docx","report1.doc","report_2026.docx","repost.doc","rep.doc","report.pdf"];
+const MASKS = [["report*.doc*",[0,1,2,3]],["rep??t.doc",[0,4]],["*.???",[0,2,4,5,6]]];
+const MOVED_ANS = "C:\\Учёба\\Литература\\Сочинения";
+
+const STEPS = [
+  {id:"s-start",t:"Старт",time:"1 мин"},
+  {id:"s-parts",t:"Адрес файла",time:"5 мин",full:"Из чего состоит адрес файла"},
+  {id:"s-nav",t:"Дерево папок",time:"8 мин",full:"Найди файл по дереву папок"},
+  {id:"s-mine",t:"Моё устройство",time:"9 мин",full:"Пути на моём устройстве"},
+  {id:"s-names",t:"Имена файлов",time:"4 мин",full:"Можно ли так назвать файл?"},
+  {id:"s-bonus",t:"Бонус ⭐",time:"по желанию",full:"Бонус ⭐: маски файлов"},
+  {id:"s-report",t:"Отчёт",time:"3 мин",full:"Вывод и отчёт"}
+];
+
+/* ===== Состояние ===== */
+const blank=()=>({step:0,name:"",cls:"",device:"",seg:{},segd:false,p1:{},p1d:false,nav:[{p:[],done:false,miss:0},{p:[],done:false,miss:0},{p:[],done:false,miss:0}],navi:0,typed:"",typedd:false,typedok:false,
+  dlpath:"",fname:"",fpath:"",levels:"",sepmine:"",exts:[],junk:"",nm:{},nmd:false,mk:[[],[],[]],mkd:[false,false,false],moved:"",movedd:false,movedok:false,concl:"",mood:""});
+let S=blank();
+function load(){try{const r=localStorage.getItem(CONFIG.storageKey);if(r){S=Object.assign(blank(),JSON.parse(r));}}catch(e){}}
+function save(){try{localStorage.setItem(CONFIG.storageKey,JSON.stringify(S));}catch(e){}}
+const $=(s,el=document)=>el.querySelector(s), $$=(s,el=document)=>[...el.querySelectorAll(s)];
+const nz=v=>(v===undefined||v===null)?"":v;
+const esc=s=>String(nz(s)).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const V=(v,d="—")=>(v===undefined||v===null||String(v).trim()==="")?d:String(v).trim();
+function guessDevice(){const ua=navigator.userAgent||"";if(/iPhone|iPad|iPod/.test(ua))return"ios";if(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1)return"ios";if(/Android/.test(ua))return"android";if(/Windows/.test(ua))return"win";if(/Macintosh|Mac OS X/.test(ua))return"mac";if(/CrOS|Linux/.test(ua))return"other";return"";}
+const GUESS=guessDevice();
+const INAPP=/Telegram|VKAndroidApp|VKClient|vkontakte|FBAN|FBAV|Instagram|WhatsApp|OKApp|; wv\)/i.test(navigator.userAgent||"");
+function normPath(s){return String(s||"").trim().replace(/\//g,"\\").replace(/\\+/g,"\\").replace(/\\$/,"").replace(/ё/gi,m=>m==="Ё"?"Е":"е").toLowerCase().replace(/^c:(?!\\)/,"c:\\");}
+
+/* ===== Устройство ===== */
+function renderDevices(){
+  $("#devs").innerHTML=Object.entries(DEV).map(([k,d])=>`<button class="dev ${S.device===k?"sel":""}" data-dev="${k}" type="button">${ICON[d.icon]}<b>${d.label}</b><small>${d.sub}</small>${GUESS===k?'<span class="guess">похоже, это оно</span>':""}</button>`).join("");
+  $$("#devs .dev").forEach(b=>b.onclick=()=>{S.device=b.dataset.dev;save();renderDevices();renderMine();updateNav();toast("Отлично! Инструкции подстроены под: "+DEV[S.device].short);});
+  const chip=$("#devchip");
+  if(S.device){chip.classList.add("show");chip.innerHTML=ICON[DEV[S.device].icon]+DEV[S.device].short+' <span style="color:var(--violet-d)">· сменить</span>';}else chip.classList.remove("show");
+}
+$("#devchip").onclick=()=>go(0,true);
+
+/* ===== Задание 1 ===== */
+let curLabel=0;
+function renderSegs(){
+  $("#palette").innerHTML=LABELS.map((l,i)=>`<button type="button" data-l="${i}" class="${curLabel===i?"sel":""}" ${S.segd?"disabled":""}><i class="legend${i}"></i>${l}</button>`).join("");
+  $$("#palette button").forEach(b=>b.onclick=()=>{curLabel=+b.dataset.l;renderSegs();});
+  $("#pathline").innerHTML=SEGS.map((sg,i)=>{const lab=S.seg[i];const cls=lab===undefined?"":"l"+lab;const chk=S.segd?(lab===sg[1]?" ok":" bad"):"";
+    const sep=i===0?"":(i===SEGS.length-1?"":'<span class="sep">\\</span>');
+    return sep+`<button type="button" class="seg ${cls}${chk}" data-s="${i}" ${S.segd?"disabled":""}>${esc(sg[0])}<small>${lab===undefined?"?":LABELS[lab]}</small></button>`;}).join("");
+  $$("#pathline .seg").forEach(b=>b.onclick=()=>{S.seg[b.dataset.s]=curLabel;save();renderSegs();updateNav();});
+  const n=Object.keys(S.seg).length;
+  $("#segleft").textContent=S.segd?"":(n<SEGS.length?`Подписано ${n} из ${SEGS.length}`:"Всё подписано — проверяй");
+  $("#segcheck").style.display=S.segd?"none":"";
+  const r=$("#segres");r.className="res";
+  if(S.segd){const ok=SEGS.filter((sg,i)=>S.seg[i]===sg[1]).length;r.className="res "+(ok===SEGS.length?"ok":"bad");
+    r.innerHTML=ok===SEGS.length?`Верно: ${ok} из ${SEGS.length}! <span class="mono">C:</span> — диск, дальше три папки, потом имя и расширение.`:`Верно ${ok} из ${SEGS.length}. Правильно: <span class="mono">C:</span> — диск (корень), <span class="mono">Учёба</span>, <span class="mono">Информатика</span>, <span class="mono">Практические</span> — папки, <span class="mono">путь_к_файлу</span> — имя, <span class="mono">.docx</span> — расширение.`;}
+}
+$("#segcheck").onclick=()=>{if(Object.keys(S.seg).length<SEGS.length){toast("Подпиши все части адреса");return;}S.segd=true;save();renderSegs();updateNav();};
+
+/* ===== Вопросы с вариантами ===== */
+function choiceTask(cfg){
+  const {list,box,key,done,btn,left,score,opts,mono}=cfg;
+  function render(){
+    $(box).innerHTML=list.map((q,i)=>`<div class="ch" data-i="${i}"><div class="q ${mono?"mono":""}">${esc(q.q)}</div><div class="opts">${(opts||q.o).map((o,j)=>`<button type="button" data-j="${j}" class="${q.o&&q.o[0].length<3?"mono":""}">${esc(o)}</button>`).join("")}</div><p class="why"></p></div>`).join("");
+    $$(box+" .ch").forEach(el=>{const i=+el.dataset.i;$$("button",el).forEach(b=>b.onclick=()=>{if(S[done])return;S[key][i]=+b.dataset.j;save();paint();updateNav();});});
+    paint();
+  }
+  function paint(){
+    const n=Object.keys(S[key]).length;
+    $(left).textContent=S[done]?"":(n<list.length?`Отвечено ${n} из ${list.length}`:"Всё отвечено — проверяй");
+    $(btn).style.display=S[done]?"none":"";
+    let ok=0;
+    $$(box+" .ch").forEach(el=>{const i=+el.dataset.i,a=S[key][i],r=list[i].a,opt=opts||list[i].o;el.classList.remove("ok","bad");
+      $$("button",el).forEach(b=>{const j=+b.dataset.j;b.classList.remove("sel","pick-ok","pick-bad","right");b.disabled=S[done];if(!S[done]&&a===j)b.classList.add("sel");});
+      if(S[done]){if(a===r){ok++;el.classList.add("ok");$(`[data-j="${a}"]`,el).classList.add("pick-ok");$(".why",el).innerHTML="<b>Верно.</b> "+esc(list[i].w);}
+        else{el.classList.add("bad");if(a!==undefined)$(`[data-j="${a}"]`,el).classList.add("pick-bad");$(`[data-j="${r}"]`,el).classList.add("right");$(".why",el).innerHTML="<b>Правильно: "+esc(opt[r])+".</b> "+esc(list[i].w);}}});
+    if(S[done]&&score){const el=$(score);el.style.display="flex";$(".big",el).textContent=ok+"/"+list.length;$(".msg",el).textContent=ok===list.length?"Идеально!":ok>=list.length-1?"Отлично! Посмотри объяснение к ошибке.":"Прочитай объяснения — они помогут запомнить правила.";}
+  }
+  $(btn).onclick=()=>{if(Object.keys(S[key]).length<list.length){toast("Ответь на все вопросы, потом проверяй");return;}S[done]=true;save();paint();updateNav();};
+  return render;
+}
+const renderP1=choiceTask({list:P1Q,box:"#p1q",key:"p1",done:"p1d",btn:"#p1check",left:"#p1left"});
+const renderNames=choiceTask({list:NAMES,box:"#nmq",key:"nm",done:"nmd",btn:"#nmcheck",left:"#nmleft",score:"#nmscore",opts:["Можно","Нельзя"],mono:true});
+
+/* ===== Задание 2: проводник ===== */
+function treeText(node,prefix,last,root){
+  const isDir=!!node.c, line=root?`<b>💽 ${esc(node.n)}\\</b>`:prefix+(last?"└── ":"├── ")+(isDir?"📁 <b>"+esc(node.n)+"</b>":"📄 "+esc(node.n));
+  let out=line+"\n"; if(isDir){node.c.forEach((ch,i)=>{out+=treeText(ch,root?"":prefix+(last?"    ":"│   "),i===node.c.length-1,false);});}
+  return out;
+}
+function nodeAt(path){let n=FS;for(const p of path){n=(n.c||[]).find(x=>x.n===p);if(!n)return FS;}return n;}
+const pathStr=(arr)=>"C:\\"+arr.join("\\");
+function renderNav(){
+  $("#tree").innerHTML=treeText(FS,"",true,true).trimEnd();
+  $("#navtabs").innerHTML=TARGETS.map((t,i)=>`<button type="button" data-t="${i}" class="${S.navi===i?"cur":""} ${S.nav[i].done?"ok":""}">${S.nav[i].done?"✓ ":""}Файл ${i+1}</button>`).join("");
+  $$("#navtabs button").forEach(b=>b.onclick=()=>{S.navi=+b.dataset.t;save();renderNav();});
+  const i=S.navi,st=S.nav[i],tgt=TARGETS[i];
+  $("#navgoal").innerHTML=`Найди файл <span class="mono">${esc(tgt[tgt.length-1])}</span>`;
+  $("#navst").className="st "+(st.done?"done":"wait");$("#navst").textContent=st.done?"найден":"ищем";
+  $("#fmaddr").textContent=pathStr(st.p)+(st.p.length?"":"");
+  $("#fmup").disabled=st.p.length===0||st.done;
+  const node=nodeAt(st.p);
+  const kids=(node.c||[]).slice().sort((a,b)=>(!!b.c)-(!!a.c));
+  $("#fmlist").innerHTML=kids.length?kids.map(k=>`<li><button type="button" data-n="${esc(k.n)}" ${st.done?"disabled":""}><span class="ic">${k.c?"📁":"📄"}</span>${esc(k.n)}${k.c?"":`<span class="ext">файл</span>`}</button></li>`).join(""):'<li class="empty">Папка пуста</li>';
+  $$("#fmlist button").forEach(b=>b.onclick=()=>{const k=kids.find(x=>x.n===b.dataset.n);
+    if(k.c){st.p.push(k.n);$("#fmmsg").textContent="";$("#fmmsg").className="fmmsg";}
+    else{const full=st.p.concat([k.n]);if(full.join("/")===tgt.join("/")){st.done=true;toast("Нашла! 🎉");}else{st.miss++;$("#fmmsg").textContent="Это другой файл — ищи дальше.";$("#fmmsg").className="fmmsg bad";}}
+    save();renderNav();updateNav();});
+  const f=$("#navfound");
+  if(st.done){f.style.display="";f.innerHTML=`Полное имя файла: <span class="mono">${esc(pathStr(tgt))}</span>`+(i<TARGETS.length-1&&!S.nav[i+1].done?` <button type="button" class="pill" id="nextt" style="margin-left:8px;min-height:36px;padding:4px 12px">Следующий файл →</button>`:"");
+    const nb=$("#nextt");if(nb)nb.onclick=()=>{S.navi=i+1;save();renderNav();};}
+  else f.style.display="none";
+}
+$("#fmup").onclick=()=>{const st=S.nav[S.navi];st.p.pop();save();$("#fmmsg").textContent="";renderNav();};
+
+/* ===== Ввод пути текстом ===== */
+function pathCheck(key,doneKey,okKey,ans,resSel,btnSel){
+  function paint(){const r=$(resSel),inp=$(`[data-k="${key}"]`);
+    $(btnSel).style.display=S[doneKey]?"none":"";if(inp)inp.disabled=S[doneKey];
+    const bs=$(`[data-ins="${key}"]`);if(bs)bs.disabled=S[doneKey];
+    if(!S[doneKey]){r.className="res";return;}
+    r.className="res "+(S[okKey]?"ok":"bad");
+    r.innerHTML=S[okKey]?`Верно! <span class="mono">${esc(ans)}</span>`:`Не совсем. Правильный ответ: <span class="mono">${esc(ans)}</span>`;}
+  $(btnSel).onclick=()=>{if(!S[key].trim()){toast("Сначала запиши путь");return;}S[doneKey]=true;S[okKey]=normPath(S[key])===normPath(ans);save();paint();updateNav();};
+  return paint;
+}
+const paintTyped=pathCheck("typed","typedd","typedok",TYPED_ANS,"#typedres","#typedcheck");
+const paintMoved=pathCheck("moved","movedd","movedok",MOVED_ANS,"#movedres","#movedcheck");
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ins]");if(!b)return;const k=b.dataset.ins,inp=$(`[data-k="${k}"]`);if(!inp||inp.disabled)return;
+  const s=inp.selectionStart!=null?inp.selectionStart:inp.value.length,en=inp.selectionEnd!=null?inp.selectionEnd:inp.value.length;
+  inp.value=inp.value.slice(0,s)+"\\"+inp.value.slice(en);S[k]=inp.value;save();inp.focus();try{inp.setSelectionRange(s+1,s+1);}catch(x){}});
+
+/* ===== Задание 3 ===== */
+function renderMine(){
+  const d=S.device||"other",M=MINE[d];
+  $("#minehow").innerHTML=M.steps.map(s=>`<li>${s}</li>`).join("");
+  $("#minenote").textContent=M.note;$("#dlhint").textContent=M.dl;
+  const dp=$('[data-k="dlpath"]');if(dp)dp.placeholder=M.dl.replace("Например: ","");
+}
+function renderExts(){
+  $("#exts").innerHTML=EXTS.map(e=>`<label><input type="checkbox" value="${e[0]}" ${S.exts.includes(e[0])?"checked":""}><span class="mono">${e[0]}</span>&nbsp;<span class="small">${e[1].replace(/^\.\w+ — /,"")}</span></label>`).join("");
+  $$("#exts input").forEach(c=>c.onchange=()=>{S.exts=$$("#exts input").filter(x=>x.checked).map(x=>x.value);save();updateNav();});
+}
+
+/* ===== Бонус: маски ===== */
+function maskMatch(mask,name){const re=new RegExp("^"+mask.replace(/[.+^${}()|[\]\\]/g,"\\$&").replace(/\*/g,".*").replace(/\?/g,".")+"$");return re.test(name);}
+function renderMasks(){
+  $("#mfiles").innerHTML=MFILES.map(f=>`<span>${f}</span>`).join("");
+  $("#masks").innerHTML=MASKS.map((m,mi)=>`<div class="card"><h3>⭐ Какие файлы подходят под маску <span class="mono" style="color:var(--violet-d)">${m[0]}</span>?</h3>
+    <div class="checks ${S.mkd[mi]?"locked":""}" data-m="${mi}">${MFILES.map((f,fi)=>{const on=S.mk[mi].includes(fi),right=m[1].includes(fi);const cls=S.mkd[mi]?(right?(on?"ok":"bad"):(on?"bad":"")):"";
+      return `<label class="mono ${cls}"><input type="checkbox" value="${fi}" ${on?"checked":""} ${S.mkd[mi]?"disabled":""}>${f}</label>`;}).join("")}</div>
+    <div class="task-actions">${S.mkd[mi]?"":`<button class="btn primary" style="margin-left:0" type="button" data-mc="${mi}">Проверить</button>`}</div>
+    <div class="res ${S.mkd[mi]?(sameSet(S.mk[mi],m[1])?"ok":"bad"):""}">${S.mkd[mi]?(sameSet(S.mk[mi],m[1])?"Верно!":"Не совсем. Подходят: <span class=\"mono\">"+m[1].map(i=>MFILES[i]).join(", ")+"</span>. Зелёным отмечены нужные файлы, красным — ошибки."):""}</div></div>`).join("");
+  $$("#masks .checks").forEach(box=>{const mi=+box.dataset.m;$$("input",box).forEach(c=>c.onchange=()=>{S.mk[mi]=$$("input",box).filter(x=>x.checked).map(x=>+x.value);save();});});
+  $$("[data-mc]").forEach(b=>b.onclick=()=>{const mi=+b.dataset.mc;if(!S.mk[mi].length){toast("Отметь хотя бы один файл");return;}S.mkd[mi]=true;save();renderMasks();updateNav();});
+}
+const sameSet=(a,b)=>a.length===b.length&&a.every(x=>b.includes(x));
+
+/* ===== Поля ===== */
+function bindSimple(){
+  $$("[data-k]").forEach(el=>{el.value=nz(S[el.dataset.k]);el.oninput=()=>{S[el.dataset.k]=el.value;save();updateNav();};});
+  $$("[data-group]").forEach(g=>{const k=g.dataset.group;$$(".pill",g).forEach(b=>{b.classList.toggle("sel",S[k]===b.dataset.v);b.onclick=()=>{S[k]=b.dataset.v;save();$$(".pill",g).forEach(x=>x.classList.toggle("sel",x===b));updateNav();};});});
+}
+
+/* ===== Готовность ===== */
+function stepDone(i){switch(STEPS[i].id){
+  case "s-start":return !!(S.name.trim()&&S.device);
+  case "s-parts":return S.segd&&S.p1d;
+  case "s-nav":return S.nav.every(n=>n.done)&&S.typedd;
+  case "s-mine":return !!(S.dlpath.trim()&&S.fname.trim()&&S.fpath.trim()&&String(S.levels).trim()&&S.sepmine);
+  case "s-names":return S.nmd;
+  case "s-bonus":return S.mkd.some(Boolean)||S.movedd;
+  case "s-report":return !!(S.concl.trim()&&S.mood);}}
+const MISS={"s-start":"Имя и устройство","s-parts":"Задание 1: разметка адреса и вопросы (нажми «Проверить»)","s-nav":"Задание 2: найти 3 файла и записать путь к плейлисту","s-mine":"Задание 3: пути на моём устройстве","s-names":"Задание 4: имена файлов (нажми «Проверить»)","s-report":"Вывод и самооценка"};
+
+/* ===== Навигация ===== */
+function renderPlan(){$("#plan").innerHTML=STEPS.slice(1,-1).map((s,i)=>`<li><span class="ic" style="color:var(--violet);font-weight:800">${s.id==="s-bonus"?"★":i+1}</span>${s.full}<span class="t">${s.time}</span></li>`).join("");}
+function renderSteps(){
+  $("#steps").innerHTML=STEPS.map((s,i)=>`<button type="button" data-go="${i}" class="${i===S.step?"cur":""} ${i!==S.step&&stepDone(i)?"done":""}" ${i>0&&!S.device?"disabled":""}><span class="n">${stepDone(i)&&i!==S.step?"✓":s.id==="s-bonus"?"★":i}</span>${s.t.replace(" ⭐","")}</button>`).join("");
+  $$("#steps [data-go]").forEach(b=>b.onclick=()=>go(+b.dataset.go));
+  const req=STEPS.map((s,i)=>i).filter(i=>STEPS[i].id!=="s-bonus");
+  $("#progbar").style.width=Math.round(req.filter(stepDone).length/req.length*100)+"%";
+}
+function go(i,smooth){
+  if(i>0&&!S.device){toast("Сначала выбери своё устройство");i=0;}
+  S.step=Math.max(0,Math.min(STEPS.length-1,i));save();
+  $$(".screen").forEach(s=>s.classList.remove("on"));$("#"+STEPS[S.step].id).classList.add("on");
+  if(STEPS[S.step].id==="s-report")renderReport();
+  window.scrollTo({top:0,behavior:smooth?"smooth":"auto"});updateNav();
+  const nav=$("#steps"),cur=$("#steps .cur");if(cur&&nav.scrollTo)nav.scrollTo({left:cur.offsetLeft-nav.clientWidth/2+cur.offsetWidth/2,behavior:"smooth"});
+}
+function updateNav(){
+  renderSteps();const i=S.step,last=i===STEPS.length-1,id=STEPS[i].id;
+  $("#prev").style.visibility=i===0?"hidden":"visible";$("#next").style.display=last?"none":"";
+  $("#next").textContent=i===0?"Начать →":id==="s-names"?"К бонусу →":id==="s-bonus"?"К отчёту →":"Дальше →";
+  $("#navhint").textContent=last?"":i===0?(S.device?"":"выбери устройство"):id==="s-bonus"?"можно пропустить":(stepDone(i)?"задание выполнено ✓":"");
+}
+$("#prev").onclick=()=>go(S.step-1,true);
+$("#next").onclick=()=>{
+  if(S.step===0){if(!S.device){toast("Выбери устройство, с которого работаешь");return;}if(!S.name.trim()){toast("Напиши фамилию и имя — они попадут в отчёт");$("#name").focus();return;}}
+  const id=STEPS[S.step].id;if((id==="s-parts"||id==="s-names")&&!stepDone(S.step))toast("Не забудь нажать «Проверить» — без этого задание не засчитается");
+  go(S.step+1,true);
+};
+
+/* ===== Отчёт ===== */
+function results(){
+  const seg=S.segd?SEGS.filter((sg,i)=>S.seg[i]===sg[1]).length:null;
+  const p1=S.p1d?P1Q.filter((q,i)=>S.p1[i]===q.a).length:null;
+  const navFound=S.nav.filter(n=>n.done).length,navMiss=S.nav.reduce((a,n)=>a+n.miss,0);
+  const nm=S.nmd?NAMES.filter((q,i)=>S.nm[i]===q.a).length:null;
+  const mk=MASKS.map((m,i)=>S.mkd[i]?sameSet(S.mk[i],m[1]):null);
+  return {seg,p1,navFound,navMiss,nm,mk};
+}
+function renderReport(){
+  const R=results(),d=new Date();
+  const miss=STEPS.map((s,i)=>i).filter(i=>STEPS[i].id!=="s-bonus"&&!stepDone(i));
+  $("#missbox").style.display=miss.length?"":"none";
+  $("#misslist").innerHTML=miss.map(i=>`<button type="button" data-go2="${i}">→ ${MISS[STEPS[i].id]}</button>`).join("");
+  $$("[data-go2]").forEach(b=>b.onclick=()=>go(+b.dataset.go2,true));
+  const dd=(t,v)=>`<dt>${t}</dt><dd>${v!==null&&v!==undefined&&String(v).trim()!==""?esc(v):'<span class="miss">не выполнено</span>'}</dd>`;
+  const sc=(v,n)=>v===null?"":v+" из "+n;
+  const bonus=R.mk.some(x=>x!==null)||S.movedd;
+  $("#rep").innerHTML=`<div class="rh"><h3>Практическая работа «Путь к файлу»</h3><p>${esc(V(S.name,"Имя не указано"))} · ${esc(V(S.cls,"класс не указан"))} · ${d.toLocaleDateString("ru-RU")}</p></div>
+  <div class="rb">
+   <section><h4>1. Из чего состоит адрес файла</h4><dl>${dd("Разметка адреса",sc(R.seg,6))}${dd("Вопросы",sc(R.p1,4))}</dl></section>
+   <section><h4>2. Дерево папок</h4><dl>${dd("Найдено файлов",R.navFound+" из 3")}${dd("Лишних попыток",R.navFound?String(R.navMiss):"")}${dd("Путь к плейлисту",S.typedd?(S.typed.trim()+(S.typedok?" — верно":" — ошибка")):"")}</dl></section>
+   <section><h4>3. Моё устройство: ${esc(S.device?DEV[S.device].short:"—")}</h4><dl>${dd("Папка «Загрузки»",S.dlpath)}${dd("Файл",S.fname)}${dd("Полное имя",S.fpath)}${dd("Уровней вложенности",S.levels)}${dd("Разделитель",S.sepmine)}${dd("Расширения в «Загрузках»",S.exts.join(", "))}${S.junk.trim()?dd("Ненужный файл",S.junk):""}</dl></section>
+   <section><h4>4. Имена файлов</h4><dl>${dd("Правильных ответов",sc(R.nm,6))}</dl></section>
+   ${bonus?`<section><h4>⭐ Бонус</h4><dl>${MASKS.map((m,i)=>R.mk[i]===null?"":dd("Маска "+m[0],R.mk[i]?"верно":"ошибка")).join("")}${S.movedd?dd("Где оказалась",S.moved.trim()+(S.movedok?" — верно":" — ошибка")):""}</dl></section>`:""}
+   <section><h4>Вывод</h4><p style="font-weight:700">${S.concl.trim()?esc(S.concl):'<span class="miss">не выполнено</span>'}</p><dl class="mt">${dd("Самооценка",S.mood)}</dl></section>
+  </div>`;
+}
+function reportText(){
+  const R=results(),d=new Date(),L=[],sc=(v,n)=>v===null?"не выполнено":v+" из "+n;
+  L.push("ПРАКТИЧЕСКАЯ РАБОТА «ПУТЬ К ФАЙЛУ»",`Ученица: ${V(S.name)}`,`Класс: ${V(S.cls)}`,`Дата: ${d.toLocaleDateString("ru-RU")}`,`Устройство: ${S.device?DEV[S.device].label:"—"}`,"");
+  L.push("1. ИЗ ЧЕГО СОСТОИТ АДРЕС ФАЙЛА",`Разметка адреса: ${sc(R.seg,6)}`,`Вопросы: ${sc(R.p1,4)}`,"");
+  L.push("2. ДЕРЕВО ПАПОК",`Найдено файлов: ${R.navFound} из 3 (лишних попыток: ${R.navMiss})`,`Путь к плейлисту: ${S.typedd?S.typed.trim()+(S.typedok?" — верно":" — ошибка"):"не выполнено"}`,"");
+  L.push("3. ПУТИ НА МОЁМ УСТРОЙСТВЕ",`Папка «Загрузки»: ${V(S.dlpath,"не заполнено")}`,`Файл: ${V(S.fname,"не заполнено")}`,`Полное имя: ${V(S.fpath,"не заполнено")}`,`Уровней вложенности: ${V(S.levels,"не заполнено")}`,`Разделитель: ${V(S.sepmine,"не выбран")}`,`Расширения в «Загрузках»: ${V(S.exts.join(", "),"не отмечены")}`);
+  if(S.junk.trim())L.push(`Ненужный файл: ${S.junk.trim()}`);
+  L.push("","4. ИМЕНА ФАЙЛОВ",`Правильных ответов: ${sc(R.nm,6)}`);
+  if(R.mk.some(x=>x!==null)||S.movedd){L.push("","★ БОНУС");MASKS.forEach((m,i)=>{if(R.mk[i]!==null)L.push(`Маска ${m[0]}: ${R.mk[i]?"верно":"ошибка"}`);});if(S.movedd)L.push(`Где оказалась пользовательница: ${S.moved.trim()}${S.movedok?" — верно":" — ошибка"}`);}
+  L.push("","ВЫВОД",V(S.concl,"не заполнено"),`Самооценка: ${V(S.mood)}`);
+  return L.join("\n");
+}
+function translit(t){const m={а:"a",б:"b",в:"v",г:"g",д:"d",е:"e",ё:"e",ж:"zh",з:"z",и:"i",й:"y",к:"k",л:"l",м:"m",н:"n",о:"o",п:"p",р:"r",с:"s",т:"t",у:"u",ф:"f",х:"kh",ц:"ts",ч:"ch",ш:"sh",щ:"shch",ъ:"",ы:"y",ь:"",э:"e",ю:"yu",я:"ya"};
+  return String(t).split("").map(c=>{const l=c.toLowerCase(),r=m[l];if(r===undefined)return c;return c!==l&&r?r[0].toUpperCase()+r.slice(1):r;}).join("");}
+function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove("show"),2600);}
+$("#copyrep").onclick=async()=>{const txt=reportText();
+  try{await navigator.clipboard.writeText(txt);toast("Отчёт скопирован! Вставь его в Umaclass");}
+  catch(e){const ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.focus();ta.select();
+    try{document.execCommand("copy");toast("Отчёт скопирован! Вставь его в Umaclass");}catch(e2){toast("Не получилось скопировать — нажми «Скачать файл»");}ta.remove();}};
+$("#dlrep").onclick=()=>{const blob=new Blob(["\ufeff"+reportText()],{type:"text/plain;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download="Put_k_faylu_"+(translit(V(S.name,"otchet")).replace(/[^\w\- ]/g,"").trim().replace(/\s+/g,"_")||"otchet")+".txt";
+  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);toast("Файл скачан — прикрепи его к заданию");};
+$("#printrep").onclick=()=>{renderReport();window.print();};
+$("#reset").onclick=()=>{if(confirm("Точно стереть все ответы и начать заново?")){try{localStorage.removeItem(CONFIG.storageKey);}catch(e){}S=blank();init();go(0);}};
+if(CONFIG.umaclassUrl){const u=$("#umalink");u.href=CONFIG.umaclassUrl;u.style.display="";}
+
+/* ===== Экранная клавиатура ===== */
+const TOUCH=window.matchMedia&&matchMedia("(pointer:coarse)").matches;
+const TYPEABLE='input[type=text],input[type=number],textarea';
+function fieldsHere(){return $$(".screen.on "+TYPEABLE).filter(el=>!el.disabled&&el.offsetParent!==null);}
+document.addEventListener("focusin",e=>{const t=e.target;if(!t.matches||!t.matches(TYPEABLE))return;if(t.tagName==="INPUT"){const f=fieldsHere();t.enterKeyHint=f.indexOf(t)===f.length-1?"done":"next";}
+  if(!TOUCH)return;document.body.classList.add("typing");setTimeout(()=>t.scrollIntoView({block:"center",behavior:"smooth"}),350);});
+document.addEventListener("focusout",()=>{setTimeout(()=>{const a=document.activeElement;if(!a||!a.matches||!a.matches(TYPEABLE))document.body.classList.remove("typing");},150);});
+document.addEventListener("keydown",e=>{const t=e.target;if(e.key!=="Enter"||!t.matches||!t.matches("input[type=text],input[type=number]"))return;e.preventDefault();const f=fieldsHere(),i=f.indexOf(t);if(i>-1&&i<f.length-1)f[i+1].focus();else t.blur();});
+let kbWasOpen=false,kbBase=window.visualViewport?visualViewport.height:window.innerHeight;
+function kbResize(){if(!TOUCH)return;const h=window.visualViewport?visualViewport.height:window.innerHeight;if(!document.body.classList.contains("typing"))kbBase=h;const open=kbBase-h>120;if(kbWasOpen&&!open)document.body.classList.remove("typing");kbWasOpen=open;}
+if(window.visualViewport)visualViewport.addEventListener("resize",kbResize);else window.addEventListener("resize",kbResize);
+
+/* ===== Запуск ===== */
+function init(){
+  if(INAPP)$("#inapp").style.display="";
+  renderDevices();renderPlan();renderSegs();renderP1();renderNav();renderMine();renderExts();renderNames();renderMasks();bindSimple();paintTyped();paintMoved();
+}
+load();init();go(S.step||0);
+</script>
+</body>
+</html>
