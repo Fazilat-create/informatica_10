@@ -384,6 +384,9 @@ body.typing main.wrap{padding-bottom:45vh}
 .files{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .files span{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;font-weight:700;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:6px 10px}
 @media (min-width:1100px){.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}}
+#mynamechk div{display:flex;gap:10px;align-items:flex-start;font-weight:700;font-size:15px}
+#mynamechk div b{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:13px}
+#mynamechk .y b{background:var(--mint)}#mynamechk .n b{background:var(--coral-d)}#mynamechk .n{color:var(--coral-d)}
 @media (max-width:480px){.tree{font-size:12.5px;padding:12px}.seg{font-size:16px}}
 </style>
 </head>
@@ -411,9 +414,9 @@ body.typing main.wrap{padding-bottom:45vh}
   <div class="startgrid">
     <div class="hero">
       <div>
-        <div class="eyebrow">Практическая работа <span class="time">≈ 30 минут</span></div>
+        <div class="eyebrow">Практическая работа <span class="time">≈ 40 минут</span></div>
         <h1>Путь к файлу</h1>
-        <p class="lead">Каждый файл живёт по своему «адресу». Сегодня ты научишься читать и составлять такие адреса, найдёшь настоящие пути на своём устройстве и узнаешь, как правильно называть файлы.</p>
+        <p class="lead">Каждый файл живёт по своему «адресу». Сегодня ты научишься читать и составлять такие адреса, найдёшь настоящие пути на своём устройстве, научишься распознавать опасные файлы и наведёшь порядок в своих папках.</p>
         <a class="btn ghost pdfbtn" href="zadanie.pdf" download="Put_k_faylu_zadanie.pdf" target="_blank" rel="noopener">⬇ Скачать задание в PDF</a>
       </div>
       <div class="art" aria-hidden="true">
@@ -556,6 +559,66 @@ body.typing main.wrap{padding-bottom:45vh}
   <div class="card mint score" id="nmscore" style="display:none"><span class="big"></span><span class="msg"></span></div>
 </section>
 
+<!-- 5. ОПАСНЫЕ ФАЙЛЫ -->
+<section class="screen" id="s-safe">
+  <div class="eyebrow">Задание 5 <span class="time">5 минут</span></div>
+  <h2>Не открывай что попало</h2>
+  <p class="lead">Мошенники маскируют вирусы под фото и документы. Файл <span class="mono"><b>фото.jpg.exe</b></span> выглядит как картинка, если система прячет расширения, — а на самом деле это программа. Научимся видеть подвох.</p>
+  <div class="split">
+    <div class="card soft sticky">
+      <h3>Включи показ расширений</h3>
+      <ol class="howto" id="safehow"></ol>
+      <p style="font-weight:800;margin-top:14px">Получилось?</p>
+      <div class="choices" data-group="extOn">
+        <button class="pill" type="button" data-v="Включила (или расширения уже были видны)">Да, расширения видны</button>
+        <button class="pill" type="button" data-v="Не получилось">Не получилось</button>
+      </div>
+    </div>
+    <div>
+      <div class="card amber">
+        <h3>Эти расширения — программы</h3>
+        <p>Открыть такой файл = <b>запустить чужую программу</b>. Если он пришёл в чате или по почте от незнакомца — не открывай.</p>
+        <div class="files" style="margin-top:10px"><span>.exe</span><span>.scr</span><span>.bat</span><span>.cmd</span><span>.msi</span><span>.apk</span></div>
+        <p class="small mt">Подсказка: смотри на <b>последнее</b> расширение — именно оно решает, чем откроется файл.</p>
+      </div>
+      <p style="font-weight:800;margin-top:18px">Тебе прислали эти файлы. Какие опасно открывать?</p>
+      <div class="qlist" id="sfq"></div>
+      <div class="task-actions"><button class="btn primary" style="margin-left:0" id="sfcheck" type="button">Проверить</button><span class="left" id="sfleft"></span></div>
+      <div class="card mint score" id="sfscore" style="display:none"><span class="big"></span><span class="msg"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. ПОРЯДОК -->
+<section class="screen" id="s-order">
+  <div class="eyebrow">Задание 6 <span class="time">7 минут</span></div>
+  <h2>Наведи порядок у себя</h2>
+  <p class="lead">Когда все учебные файлы лежат в «Загрузках» вперемешку, нужный найти трудно. Создай для учёбы свои папки — по-настоящему, на своём устройстве.</p>
+  <div class="split">
+    <div class="card soft sticky">
+      <h3>Как создать папку и перенести файл</h3>
+      <ol class="howto" id="orderhow"></ol>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Создай папки <span class="mono">Учёба → Информатика</span></h3>
+        <p class="small">Можно придумать свои названия. Перенеси в новую папку любой учебный файл из «Загрузок».</p>
+        <label class="f"><span class="l">Полный путь к новой папке</span><span class="h" id="ordhint"></span><input class="mono" type="text" data-k="ordpath" autocapitalize="off" autocorrect="off" spellcheck="false"></label>
+        <label class="f"><span class="l">Какой файл ты перенесла?</span><input type="text" data-k="ordfile" placeholder="Например: расписание.pdf" autocapitalize="off"></label>
+      </div>
+      <div class="card">
+        <h3>Как назвать файл, чтобы его не потерять</h3>
+        <p>Хорошее имя сразу говорит, <b>чей</b> файл, <b>по какому предмету</b>, <b>что внутри</b> и <b>когда</b> сделан:</p>
+        <p class="mono" style="font-weight:800;background:var(--violet-s);color:var(--violet-d);border-radius:12px;padding:10px 12px;margin-top:8px;word-break:break-all">Фамилия_Предмет_Что_ГГГГ-ММ-ДД.расширение</p>
+        <div class="qlist" id="onq" style="margin-top:14px"></div>
+        <div class="task-actions"><button class="btn primary" style="margin-left:0" id="oncheck" type="button">Проверить</button><span class="left" id="onleft"></span></div>
+        <label class="f" style="margin-top:20px"><span class="l">Придумай имя для файла с отчётом по этой практической</span><input class="mono" type="text" data-k="myname" placeholder="Фамилия_Информатика_…" autocapitalize="off" autocorrect="off" spellcheck="false"></label>
+        <div class="need" id="mynamechk" style="display:grid;gap:6px;margin-top:10px"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 5. БОНУС -->
 <section class="screen" id="s-bonus">
   <div class="bonus-head">
@@ -686,6 +749,36 @@ const NAMES = [
   {q:"сочинение (черновик).docx",a:0,w:"Можно: скобки разрешены."},
   {q:"7/8 класс.xlsx",a:1,w:"Нельзя: / — разделитель папок, система решит, что «7» — это папка."}
 ];
+/* --- Задание 5: опасные файлы --- */
+const SAFE_HOW = {
+  win:["Открой <b>Проводник</b> (<kbd>Win</kbd> + <kbd>E</kbd>).","Windows 11: вверху нажми <b>Вид</b> (или <b>Просмотреть</b>) → <b>Показать</b> → <b>Расширения имён файлов</b>.","Windows 10: вкладка <b>Вид</b> → поставь галочку <b>«Расширения имён файлов»</b>.","Теперь у файлов видно окончание: .jpg, .pdf, .exe…"],
+  mac:["Открой <b>Finder</b>.","В меню вверху: <b>Finder</b> → <b>Настройки</b> → вкладка <b>Дополнения</b>.","Поставь галочку <b>«Показывать все расширения имён файлов»</b>."],
+  android:["В приложениях «Файлы», «Мои файлы» и «Проводник» расширения обычно видны сразу — посмотри на имена в «Загрузках».","Если не видно — нажми и подержи файл → <b>⋮</b> → <b>Сведения</b> (Свойства): там полное имя.","Запомни: <b>.apk</b> — это установщик приложения. Ставь приложения только из Google Play или RuStore, а не из чатов."],
+  ios:["В приложении <b>«Файлы»</b> расширения часто спрятаны.","Нажми и подержи файл → <b>«Свойства»</b> (Информация) — там видно имя с расширением.","Хорошая новость: iPhone не запускает программы из файлов — приложения ставятся только из App Store. Но фишинговые ссылки и поддельные сайты опасны и для iPhone."],
+  other:["Открой файловый менеджер.","Найди в его настройках пункт про показ расширений или скрытых файлов.","Если такого пункта нет — смотри полное имя в свойствах файла."]
+};
+const SAFE = [
+  {q:"Фото_с_выпускного.jpg.exe",a:1,w:"Опасно! Последнее расширение — .exe, это программа. «.jpg» в середине — маскировка."},
+  {q:"Домашка_алгебра.docx",a:0,w:"Обычный документ Word."},
+  {q:"Подарок_от_магазина.apk",a:1,w:"Опасно: .apk установит на телефон неизвестное приложение. Магазины не присылают подарки файлами."},
+  {q:"Расписание_экзаменов.pdf",a:0,w:"Обычный PDF-документ. Но всё равно открывай файлы только от тех, кого знаешь."},
+  {q:"Новогодняя_открытка.scr",a:1,w:"Опасно: .scr — это «заставка экрана», то есть программа. Открытки так не присылают."},
+  {q:"Видео_с_котиками.mp4",a:0,w:"Обычное видео."}
+];
+/* --- Задание 6: порядок --- */
+const ORDER_HOW = {
+  win:["Открой <b>Проводник</b> → папку <b>Документы</b>.","Нажми <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd> (или правой кнопкой → <b>Создать</b> → <b>Папку</b>) и назови папку <b>Учёба</b>. Зайди в неё и так же создай <b>Информатика</b>.","Перетащи мышкой в новую папку любой учебный файл из «Загрузок».","Щёлкни по адресной строке — там полный путь к папке."],
+  mac:["Открой <b>Finder</b> → <b>Документы</b>.","Нажми <kbd>⇧ Shift</kbd> + <kbd>⌘</kbd> + <kbd>N</kbd>, назови папку <b>Учёба</b>, внутри так же создай <b>Информатика</b>.","Перетащи туда учебный файл из «Загрузок».","Путь видно в строке пути внизу окна (меню <b>Вид</b> → <b>Показать строку пути</b>)."],
+  android:["Открой «Файлы», «Мои файлы» или «Проводник» → <b>Внутренняя память</b>.","Нажми <b>⋮</b> или <b>+</b> → <b>Создать папку</b> → <b>Учёба</b>. Зайди в неё и создай <b>Информатика</b>.","Открой «Загрузки», нажми и подержи учебный файл → <b>Переместить</b> → выбери новую папку.","Путь к папке посмотри в её <b>Сведениях</b>."],
+  ios:["Открой «Файлы» → <b>Обзор</b> → <b>На iPhone</b>.","Нажми <b>⋯</b> вверху справа → <b>Новая папка</b> → <b>Учёба</b>. Зайди в неё и создай <b>Информатика</b>.","Открой «Загрузки», нажми и подержи учебный файл → <b>Переместить</b> → выбери новую папку.","Запиши путь так, как его показывает iPhone, например: На iPhone/Учёба/Информатика."],
+  other:["Открой файловый менеджер и папку «Документы».","Создай папку «Учёба», а в ней — «Информатика».","Перенеси туда учебный файл и посмотри путь в адресной строке."]
+};
+const ORD_HINT = {win:"Например: C:\\Users\\Мария\\Documents\\Учёба\\Информатика",mac:"Например: /Users/maria/Documents/Учёба/Информатика",android:"Например: /storage/emulated/0/Учёба/Информатика",ios:"Например: На iPhone/Учёба/Информатика",other:"Например: /home/maria/Документы/Учёба/Информатика"};
+const ONAME = [
+  {q:"Какое имя лучше для файла с домашкой, который ты отправишь учителю?",o:["Новый документ (3).docx","дз_финал_точно_финал2.docx","Иванова_Информатика_ДЗ_2026-11-23.docx"],a:2,w:"Сразу видно, чей файл, по какому предмету, что внутри и когда сделан. Учителю не придётся гадать."},
+  {q:"Почему дату лучше писать как 2026-11-23, а не 23.11.2026?",o:["Так файлы сами выстроятся по порядку дат","Так красивее","Точки в именах запрещены"],a:0,w:"При сортировке по имени сначала сравнивается год, потом месяц, потом день — файлы встанут по времени. Точки не запрещены, но лишние точки легко спутать с расширением."}
+];
+
 /* --- Бонус --- */
 const MFILES = ["report.doc","report.docx","report1.doc","report_2026.docx","repost.doc","rep.doc","report.pdf"];
 const MASKS = [["report*.doc*",[0,1,2,3]],["rep??t.doc",[0,4]],["*.???",[0,2,4,5,6]]];
@@ -697,13 +790,15 @@ const STEPS = [
   {id:"s-nav",t:"Дерево папок",time:"8 мин",full:"Найди файл по дереву папок"},
   {id:"s-mine",t:"Моё устройство",time:"9 мин",full:"Пути на моём устройстве"},
   {id:"s-names",t:"Имена файлов",time:"4 мин",full:"Можно ли так назвать файл?"},
+  {id:"s-safe",t:"Опасные файлы",time:"5 мин",full:"Не открывай что попало"},
+  {id:"s-order",t:"Порядок",time:"7 мин",full:"Наведи порядок у себя"},
   {id:"s-bonus",t:"Бонус ⭐",time:"по желанию",full:"Бонус ⭐: маски файлов"},
   {id:"s-report",t:"Отчёт",time:"3 мин",full:"Вывод и отчёт"}
 ];
 
 /* ===== Состояние ===== */
 const blank=()=>({step:0,name:"",cls:"",device:"",seg:{},segd:false,p1:{},p1d:false,nav:[{p:[],done:false,miss:0},{p:[],done:false,miss:0},{p:[],done:false,miss:0}],navi:0,typed:"",typedd:false,typedok:false,
-  dlpath:"",fname:"",fpath:"",levels:"",sepmine:"",exts:[],junk:"",nm:{},nmd:false,mk:[[],[],[]],mkd:[false,false,false],moved:"",movedd:false,movedok:false,concl:"",mood:""});
+  dlpath:"",fname:"",fpath:"",levels:"",sepmine:"",exts:[],junk:"",nm:{},nmd:false,extOn:"",sf:{},sfd:false,ordpath:"",ordfile:"",on:{},ond:false,myname:"",mk:[[],[],[]],mkd:[false,false,false],moved:"",movedd:false,movedok:false,concl:"",mood:""});
 let S=blank();
 function load(){try{const r=localStorage.getItem(CONFIG.storageKey);if(r){S=Object.assign(blank(),JSON.parse(r));}}catch(e){}}
 function save(){try{localStorage.setItem(CONFIG.storageKey,JSON.stringify(S));}catch(e){}}
@@ -767,6 +862,14 @@ function choiceTask(cfg){
 }
 const renderP1=choiceTask({list:P1Q,box:"#p1q",key:"p1",done:"p1d",btn:"#p1check",left:"#p1left"});
 const renderNames=choiceTask({list:NAMES,box:"#nmq",key:"nm",done:"nmd",btn:"#nmcheck",left:"#nmleft",score:"#nmscore",opts:["Можно","Нельзя"],mono:true});
+const renderSafe=choiceTask({list:SAFE,box:"#sfq",key:"sf",done:"sfd",btn:"#sfcheck",left:"#sfleft",score:"#sfscore",opts:["Обычный файл","Опасно"],mono:true});
+const renderOnames=choiceTask({list:ONAME,box:"#onq",key:"on",done:"ond",btn:"#oncheck",left:"#onleft"});
+function nameChecks(n){n=String(n||"").trim();const base=n.replace(/\.[^.]+$/,"");
+  return [["Есть расширение (.docx, .pdf, .jpg…)",/\.[A-Za-zА-Яа-яЁё0-9]{2,5}$/.test(n)],
+          ["Нет запрещённых символов \\ / : * ? \" < > |",n.length>0&&!/[\\/:*?"<>|]/.test(n)],
+          ["Понятно, чей файл и что внутри — хотя бы 3 части через _",base.split("_").filter(function(x){return x.trim();}).length>=3]];}
+function paintName(){const el=$("#mynamechk");if(!el)return;if(!S.myname.trim()){el.innerHTML='<p class="small">Начни печатать — проверка появится здесь.</p>';return;}
+  el.innerHTML=nameChecks(S.myname).map(c=>`<div class="${c[1]?"y":"n"}"><b>${c[1]?"✓":"✗"}</b>${esc(c[0])}</div>`).join("");}
 
 /* ===== Задание 2: проводник ===== */
 function treeText(node,prefix,last,root){
@@ -822,6 +925,9 @@ function renderMine(){
   $("#minehow").innerHTML=M.steps.map(s=>`<li>${s}</li>`).join("");
   $("#minenote").textContent=M.note;$("#dlhint").textContent=M.dl;
   const dp=$('[data-k="dlpath"]');if(dp)dp.placeholder=M.dl.replace("Например: ","");
+  $("#safehow").innerHTML=SAFE_HOW[d].map(s=>`<li>${s}</li>`).join("");
+  $("#orderhow").innerHTML=ORDER_HOW[d].map(s=>`<li>${s}</li>`).join("");
+  $("#ordhint").textContent=ORD_HINT[d];const op=$('[data-k="ordpath"]');if(op)op.placeholder=ORD_HINT[d].replace("Например: ","");
 }
 function renderExts(){
   $("#exts").innerHTML=EXTS.map(e=>`<label><input type="checkbox" value="${e[0]}" ${S.exts.includes(e[0])?"checked":""}><span class="mono">${e[0]}</span>&nbsp;<span class="small">${e[1].replace(/^\.\w+ — /,"")}</span></label>`).join("");
@@ -844,7 +950,7 @@ const sameSet=(a,b)=>a.length===b.length&&a.every(x=>b.includes(x));
 
 /* ===== Поля ===== */
 function bindSimple(){
-  $$("[data-k]").forEach(el=>{el.value=nz(S[el.dataset.k]);el.oninput=()=>{S[el.dataset.k]=el.value;save();updateNav();};});
+  $$("[data-k]").forEach(el=>{el.value=nz(S[el.dataset.k]);el.oninput=()=>{S[el.dataset.k]=el.value;save();updateNav();if(el.dataset.k==="myname")paintName();};});
   $$("[data-group]").forEach(g=>{const k=g.dataset.group;$$(".pill",g).forEach(b=>{b.classList.toggle("sel",S[k]===b.dataset.v);b.onclick=()=>{S[k]=b.dataset.v;save();$$(".pill",g).forEach(x=>x.classList.toggle("sel",x===b));updateNav();};});});
 }
 
@@ -855,9 +961,11 @@ function stepDone(i){switch(STEPS[i].id){
   case "s-nav":return S.nav.every(n=>n.done)&&S.typedd;
   case "s-mine":return !!(S.dlpath.trim()&&S.fname.trim()&&S.fpath.trim()&&String(S.levels).trim()&&S.sepmine);
   case "s-names":return S.nmd;
+  case "s-safe":return S.sfd&&!!S.extOn;
+  case "s-order":return !!(S.ordpath.trim()&&S.ordfile.trim()&&S.ond&&S.myname.trim());
   case "s-bonus":return S.mkd.some(Boolean)||S.movedd;
   case "s-report":return !!(S.concl.trim()&&S.mood);}}
-const MISS={"s-start":"Имя и устройство","s-parts":"Задание 1: разметка адреса и вопросы (нажми «Проверить»)","s-nav":"Задание 2: найти 3 файла и записать путь к плейлисту","s-mine":"Задание 3: пути на моём устройстве","s-names":"Задание 4: имена файлов (нажми «Проверить»)","s-report":"Вывод и самооценка"};
+const MISS={"s-start":"Имя и устройство","s-parts":"Задание 1: разметка адреса и вопросы (нажми «Проверить»)","s-nav":"Задание 2: найти 3 файла и записать путь к плейлисту","s-mine":"Задание 3: пути на моём устройстве","s-names":"Задание 4: имена файлов (нажми «Проверить»)","s-safe":"Задание 5: опасные файлы (включи расширения и нажми «Проверить»)","s-order":"Задание 6: свои папки и имя файла","s-report":"Вывод и самооценка"};
 
 /* ===== Навигация ===== */
 function renderPlan(){$("#plan").innerHTML=STEPS.slice(1,-1).map((s,i)=>`<li><span class="ic" style="color:var(--violet);font-weight:800">${s.id==="s-bonus"?"★":i+1}</span>${s.full}<span class="t">${s.time}</span></li>`).join("");}
@@ -878,13 +986,13 @@ function go(i,smooth){
 function updateNav(){
   renderSteps();const i=S.step,last=i===STEPS.length-1,id=STEPS[i].id;
   $("#prev").style.visibility=i===0?"hidden":"visible";$("#next").style.display=last?"none":"";
-  $("#next").textContent=i===0?"Начать →":id==="s-names"?"К бонусу →":id==="s-bonus"?"К отчёту →":"Дальше →";
+  $("#next").textContent=i===0?"Начать →":id==="s-order"?"К бонусу →":id==="s-bonus"?"К отчёту →":"Дальше →";
   $("#navhint").textContent=last?"":i===0?(S.device?"":"выбери устройство"):id==="s-bonus"?"можно пропустить":(stepDone(i)?"задание выполнено ✓":"");
 }
 $("#prev").onclick=()=>go(S.step-1,true);
 $("#next").onclick=()=>{
   if(S.step===0){if(!S.device){toast("Выбери устройство, с которого работаешь");return;}if(!S.name.trim()){toast("Напиши фамилию и имя — они попадут в отчёт");$("#name").focus();return;}}
-  const id=STEPS[S.step].id;if((id==="s-parts"||id==="s-names")&&!stepDone(S.step))toast("Не забудь нажать «Проверить» — без этого задание не засчитается");
+  const id=STEPS[S.step].id;if((id==="s-parts"||id==="s-names"||id==="s-safe")&&!stepDone(S.step))toast("Не забудь нажать «Проверить» — без этого задание не засчитается");
   go(S.step+1,true);
 };
 
@@ -894,8 +1002,11 @@ function results(){
   const p1=S.p1d?P1Q.filter((q,i)=>S.p1[i]===q.a).length:null;
   const navFound=S.nav.filter(n=>n.done).length,navMiss=S.nav.reduce((a,n)=>a+n.miss,0);
   const nm=S.nmd?NAMES.filter((q,i)=>S.nm[i]===q.a).length:null;
+  const sf=S.sfd?SAFE.filter((q,i)=>S.sf[i]===q.a).length:null;
+  const on=S.ond?ONAME.filter((q,i)=>S.on[i]===q.a).length:null;
+  const nmOk=S.myname.trim()?nameChecks(S.myname).every(c=>c[1]):null;
   const mk=MASKS.map((m,i)=>S.mkd[i]?sameSet(S.mk[i],m[1]):null);
-  return {seg,p1,navFound,navMiss,nm,mk};
+  return {seg,p1,navFound,navMiss,nm,sf,on,nmOk,mk};
 }
 function renderReport(){
   const R=results(),d=new Date();
@@ -912,6 +1023,8 @@ function renderReport(){
    <section><h4>2. Дерево папок</h4><dl>${dd("Найдено файлов",R.navFound+" из 3")}${dd("Лишних попыток",R.navFound?String(R.navMiss):"")}${dd("Путь к плейлисту",S.typedd?(S.typed.trim()+(S.typedok?" — верно":" — ошибка")):"")}</dl></section>
    <section><h4>3. Моё устройство: ${esc(S.device?DEV[S.device].short:"—")}</h4><dl>${dd("Папка «Загрузки»",S.dlpath)}${dd("Файл",S.fname)}${dd("Полное имя",S.fpath)}${dd("Уровней вложенности",S.levels)}${dd("Разделитель",S.sepmine)}${dd("Расширения в «Загрузках»",S.exts.join(", "))}${S.junk.trim()?dd("Ненужный файл",S.junk):""}</dl></section>
    <section><h4>4. Имена файлов</h4><dl>${dd("Правильных ответов",sc(R.nm,6))}</dl></section>
+   <section><h4>5. Опасные файлы</h4><dl>${dd("Показ расширений",S.extOn)}${dd("Распознала файлов",sc(R.sf,6))}</dl></section>
+   <section><h4>6. Порядок в папках</h4><dl>${dd("Путь к новой папке",S.ordpath)}${dd("Перенесла файл",S.ordfile)}${dd("Вопросы об именах",sc(R.on,2))}${dd("Моё имя файла",S.myname.trim()?S.myname.trim()+(R.nmOk?" — по правилам":" — есть замечания"):"")}</dl></section>
    ${bonus?`<section><h4>⭐ Бонус</h4><dl>${MASKS.map((m,i)=>R.mk[i]===null?"":dd("Маска "+m[0],R.mk[i]?"верно":"ошибка")).join("")}${S.movedd?dd("Где оказалась",S.moved.trim()+(S.movedok?" — верно":" — ошибка")):""}</dl></section>`:""}
    <section><h4>Вывод</h4><p style="font-weight:700">${S.concl.trim()?esc(S.concl):'<span class="miss">не выполнено</span>'}</p><dl class="mt">${dd("Самооценка",S.mood)}</dl></section>
   </div>`;
@@ -924,6 +1037,8 @@ function reportText(){
   L.push("3. ПУТИ НА МОЁМ УСТРОЙСТВЕ",`Папка «Загрузки»: ${V(S.dlpath,"не заполнено")}`,`Файл: ${V(S.fname,"не заполнено")}`,`Полное имя: ${V(S.fpath,"не заполнено")}`,`Уровней вложенности: ${V(S.levels,"не заполнено")}`,`Разделитель: ${V(S.sepmine,"не выбран")}`,`Расширения в «Загрузках»: ${V(S.exts.join(", "),"не отмечены")}`);
   if(S.junk.trim())L.push(`Ненужный файл: ${S.junk.trim()}`);
   L.push("","4. ИМЕНА ФАЙЛОВ",`Правильных ответов: ${sc(R.nm,6)}`);
+  L.push("","5. ОПАСНЫЕ ФАЙЛЫ",`Показ расширений: ${V(S.extOn,"не отмечено")}`,`Распознала файлов: ${sc(R.sf,6)}`);
+  L.push("","6. ПОРЯДОК В ПАПКАХ",`Путь к новой папке: ${V(S.ordpath,"не заполнено")}`,`Перенесла файл: ${V(S.ordfile,"не заполнено")}`,`Вопросы об именах: ${sc(R.on,2)}`,`Моё имя файла: ${S.myname.trim()?S.myname.trim()+(R.nmOk?" — по правилам":" — есть замечания"):"не заполнено"}`);
   if(R.mk.some(x=>x!==null)||S.movedd){L.push("","★ БОНУС");MASKS.forEach((m,i)=>{if(R.mk[i]!==null)L.push(`Маска ${m[0]}: ${R.mk[i]?"верно":"ошибка"}`);});if(S.movedd)L.push(`Где оказалась пользовательница: ${S.moved.trim()}${S.movedok?" — верно":" — ошибка"}`);}
   L.push("","ВЫВОД",V(S.concl,"не заполнено"),`Самооценка: ${V(S.mood)}`);
   return L.join("\n");
@@ -957,7 +1072,7 @@ if(window.visualViewport)visualViewport.addEventListener("resize",kbResize);else
 /* ===== Запуск ===== */
 function init(){
   if(INAPP)$("#inapp").style.display="";
-  renderDevices();renderPlan();renderSegs();renderP1();renderNav();renderMine();renderExts();renderNames();renderMasks();bindSimple();paintTyped();paintMoved();
+  renderDevices();renderPlan();renderSegs();renderP1();renderNav();renderMine();renderExts();renderNames();renderSafe();renderOnames();renderMasks();bindSimple();paintTyped();paintMoved();paintName();
 }
 load();init();go(S.step||0);
 </script>
