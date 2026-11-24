@@ -61,7 +61,7 @@ h1{font-family:"PT Serif",Georgia,serif;font-size:clamp(30px,6vw,48px);line-heig
 /* ===== СПИСОК РАБОТ =====
    Чтобы добавить работу — допиши объект в нужный раздел.
    status: "now" — текущая тема, "done" — пройдена, "soon" — скоро.
-   practice / pdf — путь к файлам в репозитории (пустая строка = кнопки нет). */
+   practice / pdf / lesson — путь к файлам в репозитории (нет поля = нет кнопки). */
 var SECTIONS=[
   {title:"Компьютер и его программное обеспечение",note:"",items:[
     {kind:"Практическая работа",title:"Мой компьютер",topic:"Программное обеспечение компьютера",
@@ -69,9 +69,9 @@ var SECTIONS=[
      time:"≈ 30 минут",status:"done",
      practice:"moy-kompyuter/",pdf:"moy-kompyuter/zadanie.pdf"},
     {kind:"Практическая работа",title:"Путь к файлу",topic:"Файловая система компьютера",
-     desc:"Из чего состоит полное имя файла, поиск файлов по дереву папок, настоящие пути на своём устройстве и правила имён файлов.",
+     desc:"Из чего состоит полное имя файла, поиск файлов по дереву папок, настоящие пути на своём устройстве, как распознать опасный файл и как навести порядок в своих папках.",
      time:"≈ 30 минут",status:"now",
-     practice:"put-k-faylu/",pdf:"put-k-faylu/zadanie.pdf"}
+     practice:"put-k-faylu/",pdf:"put-k-faylu/zadanie.pdf",lesson:"urok-faylovaya-sistema/"}
   ]}
 ];
 
@@ -81,7 +81,8 @@ document.getElementById("root").innerHTML=SECTIONS.map(function(s){
   return '<h2 class="sec">'+esc(s.title)+(s.note?'<small>'+esc(s.note)+'</small>':'')+'</h2><div class="list">'+
   s.items.map(function(t){k++;var soon=t.status==="soon";
     var b=[t.practice&&'<a class="btn h" href="'+esc(t.practice)+'">💻 Открыть работу</a>',
-           t.pdf&&'<a class="btn p" href="'+esc(t.pdf)+'" target="_blank" rel="noopener">📄 PDF-версия</a>'].filter(Boolean).join("");
+           t.pdf&&'<a class="btn p" href="'+esc(t.pdf)+'" target="_blank" rel="noopener">📄 PDF-версия</a>',
+           t.lesson&&'<a class="btn p" href="'+esc(t.lesson)+'" target="_blank" rel="noopener">🖥️ Презентация урока</a>'].filter(Boolean).join("");
     var badge=t.status==="now"?'<span class="badge now">сейчас</span>':soon?'<span class="badge done">скоро</span>':t.status==="done"?'<span class="badge done">пройдена</span>':'';
     var meta=[t.topic&&'<span>Тема: '+esc(t.topic)+'</span>',t.time&&'<span>'+esc(t.time)+'</span>'].filter(Boolean).join("");
     return '<div class="topic '+(soon?'soon':'')+'"><div class="n">'+k+'</div><div><span class="kind">'+esc(t.kind)+'</span><h3>'+esc(t.title)+badge+'</h3>'+
