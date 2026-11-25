@@ -424,7 +424,7 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
 </section>
 
 <!-- 13б -->
-<section class="slide" data-stage="5" data-note="Подготовка к домашке. Кластеры: файл 10 КБ при кластере 4 КБ занимает 3 кластера = 12 КБ, последний заполнен наполовину. Показать: в Windows «Свойства» файла — строки «Размер» и «На диске» отличаются именно поэтому. Журнал: идём по строкам сверху вниз, как по истории; спрашиваем, какие файлы остались."><div class="stagetag"><b>Этап 5</b> · Новое знание · 15 мин</div>
+<section class="slide" data-stage="5" data-note="Подготовка к домашке. Кластеры: файл 10 КБ при кластере 4 КБ занимает 3 кластера = 12 КБ, последний заполнен наполовину. Показать: в Windows «Свойства» файла — строки «Размер» и «На диске» отличаются именно поэтому. Журнал работает всегда, но хранит не содержимое файлов, а только сами действия: нужен, чтобы после сбоя диск не «сломался». Старые версии файла он не возвращает. Журнал: идём по строкам сверху вниз, как по истории; спрашиваем, какие файлы остались."><div class="stagetag"><b>Этап 5</b> · Новое знание · 15 мин</div>
 <div class="inner">
   <h2>Как файловая система хранит и бережёт файлы</h2>
   <div class="row" style="align-items:flex-start">
@@ -438,7 +438,7 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
     </div>
     <div class="col card">
       <h3>📒 Журнал изменений</h3>
-      <p style="font-size:20px">При сбое файловая система восстановит данные по <b>журналу</b> — списку всех действий с файлами.</p>
+      <p style="font-size:20px">Файловая система записывает в <b>журнал</b> все действия с файлами. Если выключили свет, по журналу она наводит порядок — файлы и папки не ломаются.</p>
       <table class="lg"><tr><th>Файл</th><th>Изменение</th></tr>
         <tr><td>кот.txt</td><td>Создан файл</td></tr>
         <tr><td>кот.txt</td><td>Переименование, старое имя</td></tr>
@@ -521,7 +521,7 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
     <div class="tile"><div class="e">🕵️‍♀️</div><b>Опасные файлы</b></div>
     <div class="tile"><div class="e">🧹</div><b>Наведи порядок</b></div>
     <div class="tile" style="background:#1d2346;border-color:#1d2346"><div class="e">⭐</div><b style="color:#fff">Бонус: маски</b></div>
-    <div class="tile" style="display:flex;align-items:center;justify-content:center"><a class="btn-o" href="../put-k-faylu/" target="_blank" rel="noopener" style="font-size:19px;padding:10px 16px">Открыть →</a></div>
+    <div class="tile" style="display:flex;align-items:center;justify-content:center"><a class="btn-o" href="../put-k-faylu/index.html" target="_blank" rel="noopener" style="font-size:19px;padding:10px 16px">Открыть →</a></div>
   </div>
 </div>
 </section>
