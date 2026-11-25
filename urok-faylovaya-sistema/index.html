@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Файловая система компьютера · 10 класс · теория</title>
+<title>Файловая система компьютера · 10 класс</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=PT+Serif:wght@700&family=Amiri&display=swap" media="print" onload="this.media='all'">
@@ -133,24 +133,21 @@ table.lg{border-collapse:separate;border-spacing:0;border:2px solid #bcd4ee;bord
 table.lg th{background:#e6f0fa;text-align:left;padding:4px 12px;font-weight:800}
 table.lg td{padding:3px 12px;border-top:1.5px solid #dce6f3;white-space:nowrap}
 table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right:1.5px solid #dce6f3}
-.kb{display:inline-block;font-family:ui-monospace,Consolas,monospace;font-weight:800;font-size:19px;background:#1d2346;color:#fff;border-radius:9px;padding:3px 10px;box-shadow:0 3px 0 #0d1230;margin:2px 0 6px}
-.tile span.kb{display:inline-block;color:#fff;font-size:19px;margin:2px 0 6px;line-height:1.3}
-.menu b{display:inline!important;font-size:inherit!important;margin:0!important}
-.menu{font-size:17px;background:#fff;border:1.5px solid #f1d6b6;border-radius:10px;padding:4px 10px;margin-top:6px;line-height:1.35}
 #bar{position:absolute;left:0;right:0;bottom:0;height:46px;z-index:20;display:flex;align-items:center;gap:6px;padding:0 14px;background:rgba(255,250,243,.94);border-top:1px solid #f1d6b6}
 #bar .st{flex:1;height:28px;border-radius:14px;background:#f6e2c9;font-size:12.5px;display:flex;align-items:center;justify-content:center;color:#8a6a4a;cursor:pointer;white-space:nowrap;overflow:hidden;padding:0 6px}
 #bar .st.done{background:#f9c393;color:#5a3a1a}
 #bar .st.cur{background:#f58a27;color:#fff;font-weight:800}
 #bar .nb{min-width:36px;height:30px;border-radius:10px;border:none;background:#1d2346;color:#fff;font-size:16px;padding:0 8px}
 #bar .cnt{font-size:13px;color:#8a6a4a;width:46px;text-align:center}
-#notes{position:absolute;left:14px;right:14px;bottom:54px;z-index:21;max-height:330px;overflow:auto;background:#1d2346;color:#fff;border-radius:16px;padding:14px 20px;font-size:18px;line-height:1.4;display:none}
+#notes{position:absolute;left:14px;right:14px;bottom:54px;z-index:21;background:#1d2346;color:#fff;border-radius:16px;padding:14px 20px;font-size:18px;line-height:1.4;display:none}
 #notes b{color:#f9b26f}
 #notes.on{display:block}
-#notes p{margin:0 0 8px}#notes .clk{display:inline-block;background:#f58a27;color:#fff;font-weight:800;font-size:13px;border-radius:999px;padding:1px 8px;margin-right:4px}#notes .dir{color:#9fb0d8}
 </style>
 </head>
 <body>
 <div id="viewport"><div id="deck">
+
+<!-- 1 -->
 <section class="slide" data-stage="1" data-note="Приветствие, дуа перед уроком. Проверяем, все ли подключились и слышат."><div class="stagetag"><b>Этап 1</b> · Оргмомент · 1 мин</div>
 <div class="inner">
   <div style="margin-top:56px;width:600px">
@@ -167,7 +164,21 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
 </div>
 </section>
 
-<section class="slide" data-stage="2" data-note="Жизненная ситуация. Спросить: «У кого в Загрузках так же?» (обычно у всех). Открываем выводы по одному. Подводим: у каждого файла есть точный адрес, и в одной папке не может быть двух файлов с одним именем — поэтому система сама дописывает (1), (2)."><div class="stagetag"><b>Этап 2</b> · Мотивация · 2 мин</div>
+<!-- 2 -->
+<section class="slide" data-stage="2" data-note="Вспоминаем прошлую тему (ПО и практическую «Мой компьютер»). Сначала спрашиваем, потом открываем ответ кликом. Слабым подсказываем: «Чем вы открываете фото на телефоне?»"><div class="stagetag"><b>Этап 2</b> · Актуализация · 3 мин</div>
+<div class="inner">
+  <h2>Вспомним прошлый урок</h2>
+  <div style="display:grid;gap:12px">
+    <div class="card" style="padding:12px 20px"><p>💿 Программа, которая управляет компьютером, файлами и другими программами, — <span class="ans"><span>операционная система</span></span></p></div>
+    <div class="card" style="padding:12px 20px"><p>🪟 Назовите ОС для компьютера и для телефона — <span class="ans"><span>Windows, macOS, Linux · Android, iOS</span></span></p></div>
+    <div class="card" style="padding:12px 20px"><p>📥 Куда попадает файл, скачанный из интернета или из чата? — <span class="ans"><span>в папку «Загрузки»</span></span></p></div>
+    <div class="card" style="padding:12px 20px"><p>🗂️ В какой программе мы смотрим файлы и папки? — <span class="ans"><span>файловый менеджер: Проводник, Finder, «Файлы»</span></span></p></div>
+  </div>
+</div>
+</section>
+
+<!-- 3 -->
+<section class="slide" data-stage="3" data-note="Жизненная ситуация. Спросить: «У кого в Загрузках так же?» (обычно у всех). Открываем выводы по одному. Подводим: у каждого файла есть точный адрес, и в одной папке не может быть двух файлов с одним именем — поэтому система сама дописывает (1), (2)."><div class="stagetag"><b>Этап 3</b> · Мотивация · 2 мин</div>
 <div class="inner">
   <div class="row" style="align-items:flex-start;gap:34px">
     <div class="phone"><div class="scr">
@@ -193,7 +204,8 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
 </div>
 </section>
 
-<section class="slide" data-stage="3" data-note="Тема и план. В конце урока возвращаемся к плану."><div class="stagetag"><b>Этап 3</b> · Тема и цель · 1 мин</div>
+<!-- 4 -->
+<section class="slide" data-stage="4" data-note="Тема и план. В конце урока возвращаемся к плану."><div class="stagetag"><b>Этап 4</b> · Тема и цель · 1 мин</div>
 <div class="inner">
   <p class="muted" style="font-size:22px">Тема урока</p>
   <h1 style="font-size:46px;margin:6px 0 24px">Файловая система компьютера</h1>
@@ -204,21 +216,20 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
         <li><span class="num">1</span>Файл: имя и расширение</li>
         <li><span class="num">2</span>Папки и дерево папок</li>
         <li><span class="num">3</span>Путь к файлу и полное имя</li>
-        <li><span class="num">4</span>Маски файлов</li>
-        <li><span class="num">5</span>Как файловая система хранит и бережёт файлы</li>
-        <li><span class="num">6</span>Лайфхаки и безопасность</li>
+        <li><span class="num">4</span>Правила для имён файлов</li>
+        <li><span class="num">5</span>Безопасность и жизненные ловушки</li>
       </ul>
     </div>
     <div class="card soft" style="width:420px;flex:none">
       <h3>К концу урока вы сможете</h3>
-      <p style="font-size:22px">✔ записать полный путь к любому файлу<br>✔ найти файл по его пути<br>✔ посчитать, сколько места файл займёт на диске</p>
-      <p style="font-size:20px;margin-top:10px" class="muted">А потом — практическая работа «Путь к файлу» 💻</p>
+      <p style="font-size:22px">✔ записать полный путь к любому файлу<br>✔ найти файл по его пути<br>✔ отличить настоящее фото от вируса, который притворяется фото</p>
     </div>
   </div>
 </div>
 </section>
 
-<section class="slide" data-stage="4" data-note="Пункт плана 1. Записать определение. Расширение — после ПОСЛЕДНЕЙ точки. Справа: класс угадывает, что внутри файла, потом клик по карточке. Обратить внимание на две красные — это программы, их запускать опасно (вернёмся к этому)."><div class="stagetag"><b>Этап 4</b> · Теория · 12 мин</div>
+<!-- 5 -->
+<section class="slide" data-stage="5" data-note="Пункт плана 1. Записать определение. Расширение — после ПОСЛЕДНЕЙ точки. Справа: класс угадывает, что внутри файла, потом клик по карточке. Обратить внимание на две красные — это программы, их запускать опасно (вернёмся к этому)."><div class="stagetag"><b>Этап 5</b> · Новое знание · 15 мин</div>
 <div class="inner">
   <h2>Что такое файл</h2>
   <div class="row" style="align-items:flex-start">
@@ -246,7 +257,8 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
 </div>
 </section>
 
-<section class="slide" data-stage="4" data-note="Пункт плана 2. Аналогия со шкафом — для тех, кому сложно. Записать: папка (каталог), корневой каталог, дерево. Показать на дереве: корень сверху, «ветки» растут вниз — дерево перевёрнутое."><div class="stagetag"><b>Этап 4</b> · Теория · 12 мин</div>
+<!-- 6 -->
+<section class="slide" data-stage="5" data-note="Пункт плана 2. Аналогия со шкафом — для тех, кому сложно. Записать: папка (каталог), корневой каталог, дерево. Показать на дереве: корень сверху, «ветки» растут вниз — дерево перевёрнутое."><div class="stagetag"><b>Этап 5</b> · Новое знание · 15 мин</div>
 <div class="inner">
   <h2>Папки и дерево папок</h2>
   <div class="row" style="align-items:flex-start">
@@ -263,7 +275,8 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
 </div>
 </section>
 
-<section class="slide" data-stage="4" data-note="Пункт плана 3 — главное на уроке. Сравниваем с почтовым адресом: от большого к маленькому. Записать определения. Затем нажимаем на файлы в дереве — путь подсвечивается и собирается внизу. Вызвать 2–3 учениц: «Назови полное имя файла горы.jpg», потом проверить кликом."><div class="stagetag"><b>Этап 4</b> · Теория · 12 мин</div>
+<!-- 7 -->
+<section class="slide" data-stage="5" data-note="Пункт плана 3 — главное на уроке. Сравниваем с почтовым адресом: от большого к маленькому. Записать определения. Затем нажимаем на файлы в дереве — путь подсвечивается и собирается внизу. Вызвать 2–3 учениц: «Назови полное имя файла горы.jpg», потом проверить кликом."><div class="stagetag"><b>Этап 5</b> · Новое знание · 15 мин</div>
 <div class="inner">
   <h2>Путь к файлу</h2>
   <div class="row" style="align-items:flex-start">
@@ -282,7 +295,8 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
 </div>
 </section>
 
-<section class="slide" data-stage="4" data-note="Пути на разных устройствах — многие девочки работают с телефона. Главное: в Windows разделитель \, в Android/macOS/iPhone — /. Подсказка для запоминания: / — как в адресе сайта. В Android и macOS нет букв дисков. На практической они найдут настоящий путь на своём устройстве."><div class="stagetag"><b>Этап 4</b> · Теория · 12 мин</div>
+<!-- 8 -->
+<section class="slide" data-stage="5" data-note="Пути на разных устройствах — многие девочки работают с телефона. Главное: в Windows разделитель \, в Android/macOS/iPhone — /. Подсказка для запоминания: / — как в адресе сайта. В Android и macOS нет букв дисков. На практической они найдут настоящий путь на своём устройстве."><div class="stagetag"><b>Этап 5</b> · Новое знание · 15 мин</div>
 <div class="inner">
   <h2>Одно фото — разные пути</h2>
   <div class="g3">
@@ -295,9 +309,83 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
 </div>
 </section>
 
-<section class="slide" data-stage="4" data-note="Маски нужны для поиска файлов. Маски реально работают в поиске Проводника: введите *.pdf — найдутся все PDF. Справа класс решает, подходит ли файл под маску к?т.txt. На практической в бонусе будут ещё маски."><div class="stagetag"><b>Этап 4</b> · Теория · 12 мин</div>
+<!-- 9 -->
+<section class="slide" data-stage="5" data-note="Пункт плана 4. Запрещённые знаки объясняем через их «работу»: \ и / — разделители, : — диск, * ? — маски. Справа класс решает, можно или нельзя; ответ кликом. Последний пример — можно, но расширением станет docx, а «химия.дз» — именем. Вывод внизу связываем с «Документ (1)» из начала урока."><div class="stagetag"><b>Этап 5</b> · Новое знание · 15 мин</div>
 <div class="inner">
-  <h2>Маски файлов</h2>
+  <h2>Правила для имён файлов</h2>
+  <div class="row" style="align-items:flex-start">
+    <div class="col">
+      <p style="font-size:21px;font-weight:800;margin-bottom:8px">В Windows в имени нельзя использовать:</p>
+      <div class="forb"><span>\</span><span>/</span><span>:</span><span>*</span><span>?</span><span>"</span><span>&lt;</span><span>&gt;</span><span>|</span></div>
+      <div class="card" style="margin-top:12px;padding:10px 18px">
+        <p style="font-size:20px"><code><b>\ /</b></code> — разделяют папки в пути</p>
+        <p style="font-size:20px"><code><b>:</b></code> — обозначает диск, как в C:</p>
+        <p style="font-size:20px"><code><b>* ?</b></code> — нужны для поиска файлов</p>
+        <p style="font-size:20px"><code><b>" &lt; &gt; |</b></code> — служебные знаки системы</p>
+      </div>
+      <div class="rule step" style="margin-top:12px;font-size:21px">В одной папке <b>не бывает</b> двух файлов с одинаковым именем. Поэтому система и дописывает <b>«Документ (1)»</b>.</div>
+    </div>
+    <div style="width:520px;flex:none">
+      <p style="font-size:21px;font-weight:800;margin-bottom:8px">Можно так назвать файл?</p>
+      <div class="qline"><code>итоги*2026.docx</code><span class="ans bad"><span>нельзя: *</span></span></div>
+      <div class="qline"><code>Ура!.txt</code><span class="ans"><span>можно</span></span></div>
+      <div class="qline"><code>отчёт&lt;финал&gt;.pdf</code><span class="ans bad"><span>нельзя: &lt; &gt;</span></span></div>
+      <div class="qline"><code>1+1=2.txt</code><span class="ans"><span>можно</span></span></div>
+      <div class="qline"><code>Мама|Папа.jpg</code><span class="ans bad"><span>нельзя: |</span></span></div>
+      <div class="qline"><code>химия.дз.docx</code><span class="ans"><span>можно, расширение — docx</span></span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 10 -->
+<section class="slide" data-stage="5" data-note="Пункт плана 5, безопасность. Слева трюк с двойным расширением: Windows по умолчанию прячет расширения, и видно только «котик.jpg». Открываем подвох кликом. Подчеркнуть: смотрим на ПОСЛЕДНЕЕ расширение. На практической они включат показ расширений."><div class="stagetag"><b>Этап 5</b> · Новое знание · 15 мин</div>
+<div class="inner">
+  <h2>Файл-притворщик 🕵️‍♀️</h2>
+  <div class="row" style="align-items:flex-start">
+    <div class="col">
+      <p style="font-size:21px">В чат прислали «фото с котиком»:</p>
+      <div class="fake"><span class="e">🖼️</span><code>котик.jpg</code></div>
+      <div class="fake step" style="border-color:#e59a88;background:#fdf1ee"><span class="e">⚠️</span><div><code>котик.jpg<span class="red">.exe</span></code><p style="font-size:19px;margin-top:4px">А вот <b>полное</b> имя. Последнее расширение — <b>.exe</b>: это программа, а не фото!</p></div></div>
+      <div class="card blue step" style="margin-top:12px"><p style="font-size:20px">💡 Windows по умолчанию <b>прячет</b> расширения — этим и пользуются мошенники.</p></div>
+    </div>
+    <div style="width:520px;flex:none">
+      <div class="tile" style="background:#fdf1ee;border-color:#e59a88"><b style="margin-top:0">⛔ Это программы — запускать осторожно</b>
+        <div class="chips"><span>.exe</span><span>.scr</span><span>.bat</span><span>.msi</span><span>.apk</span></div></div>
+      <div class="rule step" style="margin-top:14px;font-size:21px">
+        <b>1.</b> Смотри на <b>последнее</b> расширение.<br>
+        <b>2.</b> Не открывай «подарки» и файлы от незнакомых.<br>
+        <b>3.</b> Приложения ставь только из официальных магазинов: Google Play, RuStore, App Store.
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 11 -->
+<section class="slide" data-stage="6" data-note="Физминутка — подходит и для онлайна: все встают у камеры. Учитель называет файл, ученицы показывают жестом, потом открываем ответ кликом. Ловушка — последний файл."><div class="stagetag"><b>Этап 6</b> · Физминутка · 2 мин</div>
+<div class="inner">
+  <h2>Встаём! Фото, документ или опасно? 🙋‍♀️</h2>
+  <div class="row" style="gap:14px;margin-bottom:16px">
+    <div class="col card green" style="padding:10px 16px;text-align:center"><p style="font-size:22px">🖼️ фото или видео —<br><b>руки вверх</b></p></div>
+    <div class="col card blue" style="padding:10px 16px;text-align:center"><p style="font-size:22px">📄 документ —<br><b>руки в стороны</b></p></div>
+    <div class="col card" style="padding:10px 16px;text-align:center;background:#fdf1ee;border-color:#e59a88"><p style="font-size:22px">⛔ программа —<br><b>скрестите руки</b></p></div>
+  </div>
+  <div class="g3" style="gap:10px">
+    <div class="qline"><code>горы.png</code><span class="ans"><span>вверх</span></span></div>
+    <div class="qline"><code>реферат.docx</code><span class="ans"><span>в стороны</span></span></div>
+    <div class="qline"><code>стикеры.apk</code><span class="ans bad"><span>крест</span></span></div>
+    <div class="qline"><code>расписание.pdf</code><span class="ans"><span>в стороны</span></span></div>
+    <div class="qline"><code>день_рождения.mp4</code><span class="ans"><span>вверх</span></span></div>
+    <div class="qline"><code>селфи.jpg.exe</code><span class="ans bad"><span>крест!</span></span></div>
+  </div>
+</div>
+</section>
+
+<!-- 12 -->
+<section class="slide" data-stage="5" data-note="Для сильных, можно пройти быстро. Маски реально работают в поиске Проводника: введите *.pdf — найдутся все PDF. Справа класс решает, подходит ли файл под маску к?т.txt. На практической в бонусе будут ещё маски."><div class="stagetag"><b>Этап 5</b> · Новое знание · ⭐ для любознательных</div>
+<div class="inner">
+  <h2>Маски файлов ⭐</h2>
   <div class="row" style="align-items:flex-start">
     <div class="col">
       <div class="row" style="gap:12px">
@@ -322,9 +410,21 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
 </div>
 </section>
 
+<!-- 13 -->
+<section class="slide" data-stage="5" data-note="Жизненные ситуации, которые случаются с каждым. Ярлык: самая частая ошибка — скопировать ярлык на флешку вместо файла. Корзина на телефоне — около 30 дней (Google «Файлы», «Недавно удалённые» на iPhone). FAT32 — старая файловая система, на многих флешках до сих пор; ограничение — файл не больше 4 ГБ. Решение — отформатировать флешку в exFAT (предварительно скопировав с неё всё)."><div class="stagetag"><b>Этап 5</b> · Новое знание · 15 мин</div>
+<div class="inner">
+  <h2>Полезно знать: жизненные ловушки</h2>
+  <div class="g2">
+    <div class="tile step"><div class="e">🔗</div><b>Ярлык — не файл</b><span>Значок со <b>стрелочкой</b> — только ссылка на файл. Скопировала ярлык на флешку — дома файла не будет. Копируй <b>сам файл</b>.</span></div>
+    <div class="tile step"><div class="e">🗑️</div><b>Удалила случайно?</b><span>На компьютере файл сначала попадает в <b>Корзину</b>. На телефоне — в «Корзину» или «Недавно удалённые», обычно на <b>30 дней</b>.</span></div>
+    <div class="tile step"><div class="e">💾</div><b>«Файл слишком велик»</b><span>На флешке с файловой системой <b>FAT32</b> нельзя хранить файл больше <b>4 ГБ</b>, даже если место есть. Выход — формат <b>exFAT</b>.</span></div>
+    <div class="tile step"><div class="e">☁️</div><b>Облако — тоже папки</b><span>Яндекс Диск, iCloud, Google Диск — те же папки и пути, только файлы хранятся на сервере.</span></div>
+  </div>
+</div>
+</section>
 
-
-<section class="slide" data-stage="4" data-note="Подготовка к домашке. Кластеры: файл 10 КБ при кластере 4 КБ занимает 3 кластера = 12 КБ, последний заполнен наполовину. Показать: в Windows «Свойства» файла — строки «Размер» и «На диске» отличаются именно поэтому. Журнал работает всегда, но хранит не содержимое файлов, а только сами действия: нужен, чтобы после сбоя диск не «сломался». Старые версии файла он не возвращает. Журнал: идём по строкам сверху вниз, как по истории; спрашиваем, какие файлы остались."><div class="stagetag"><b>Этап 4</b> · Теория · 12 мин</div>
+<!-- 13б -->
+<section class="slide" data-stage="5" data-note="Подготовка к домашке. Кластеры: файл 10 КБ при кластере 4 КБ занимает 3 кластера = 12 КБ, последний заполнен наполовину. Показать: в Windows «Свойства» файла — строки «Размер» и «На диске» отличаются именно поэтому. Журнал работает всегда, но хранит не содержимое файлов, а только сами действия: нужен, чтобы после сбоя диск не «сломался». Старые версии файла он не возвращает. Журнал: идём по строкам сверху вниз, как по истории; спрашиваем, какие файлы остались."><div class="stagetag"><b>Этап 5</b> · Новое знание · 15 мин</div>
 <div class="inner">
   <h2>Как файловая система хранит и бережёт файлы</h2>
   <div class="row" style="align-items:flex-start">
@@ -351,45 +451,65 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
 </div>
 </section>
 
-<section class="slide" data-stage="5" data-note="Лайфхаки. Если кто-то с компьютера — пусть попробует прямо сейчас Win + E и F2. Win + PrtSc — хороший пример пути: скриншот сам ложится в папку Изображения\Снимки экрана. Shift + Delete — предупредить: файл не попадёт в корзину."><div class="stagetag"><b>Этап 5</b> · Лайфхаки и безопасность · 5 мин</div>
+<!-- 14 -->
+<section class="slide" data-stage="7" data-note="Работаем с новым деревом (диск D:). Каждый вопрос — сначала ответ вслух, потом клик по ответу. Для проверки можно нажать на файл в дереве — путь соберётся сам. Вопрос ⭐ — про перемещение: имя файла не меняется, меняется путь."><div class="stagetag"><b>Этап 7</b> · Закрепление · 8 мин</div>
 <div class="inner">
-  <h2>Лайфхаки для файлов 🔥</h2>
-  <div class="g3">
-    <div class="tile"><span class="kb">Ctrl + Z</span><b>Ой, удалила не то!</b><span>Сразу нажми — Проводник <b>отменит</b> удаление или перемещение файла.</span></div>
-    <div class="tile"><span class="kb">F2</span><b>Быстро переименовать</b><span>Выдели файл и нажми F2 — без всяких меню.</span></div>
-    <div class="tile"><span class="kb">Win + E</span><b>Проводник за секунду</b><span>Открывает окно с папками и дисками.</span></div>
-    <div class="tile"><span class="kb">Win + PrtSc</span><b>Скриншот сразу в файл</b><span>Он сам сохранится в папку <b>Изображения\Снимки экрана</b>.</span></div>
-    <div class="tile"><div class="e">📱</div><b>Что съело память?</b><span>iPhone: <b>Настройки → Основные → Хранилище iPhone</b>. Android: <b>Настройки → Хранилище</b>.</span></div>
-    <div class="tile" style="background:#fdf1ee;border-color:#e59a88"><span class="kb" style="background:#c94a3a">Shift + Delete</span><b>Осторожно!</b><span>Удаляет файл <b>мимо корзины</b> — вернуть уже не получится.</span></div>
-  </div>
-  <div class="card blue step" style="margin-top:14px"><p style="font-size:21px">📱 <b>На телефоне</b> всё то же самое: в приложении «Файлы» <b>зажми файл пальцем</b> — появится меню «Переименовать», «Переместить», «Удалить», «Поделиться».</p></div>
-</div>
-</section>
-
-<section class="slide" data-stage="5" data-note="Безопасность — про то, что файл хранит больше, чем видно. Свежая тема: в ноябре 2026 об этом писали СМИ. Спросить: «Кто отправлял фото в Telegram «как файл», чтобы не портилось качество?» Обычная отправка «как фото» убирает координаты, а «как файл/документ» — сохраняет. Можно сразу всем выключить геометки в камере. Отключение не удаляет координаты из старых фото."><div class="stagetag"><b>Этап 5</b> · Лайфхаки и безопасность · 5 мин</div>
-<div class="inner">
-  <h2>Твоё фото знает, где ты живёшь 🕵️‍♀️</h2>
+  <h2>Найди по дереву</h2>
   <div class="row" style="align-items:flex-start">
-    <div class="col">
-      <div class="card"><p style="font-size:21px">📍 Внутри файла фото спрятаны <b>скрытые данные</b>: дата, модель телефона и часто — <b>координаты</b>, где сделан снимок. На улице — с точностью до нескольких метров.</p></div>
-      <div class="card soft step" style="margin-top:12px"><p style="font-size:21px">📤 Отправила фото в Telegram или WhatsApp <b>«как файл»</b>, чтобы не портилось качество? Координаты ушли <b>вместе с ним</b>. При обычной отправке «как фото» мессенджер их удаляет.</p></div>
-      <div class="rule step" style="margin-top:12px;font-size:21px">Фото у дома или школы <b>+</b> координаты <b>=</b> твой адрес у незнакомого человека.</div>
+    <div style="width:400px;flex:none">
+      <div class="tree live" data-tree="D" data-out="out14"></div>
+      <div class="pathout" id="out14" style="margin-top:10px;font-size:19px;min-height:54px"><span class="muted" style="font-size:17px">нажмите на файл для проверки</span></div>
     </div>
-    <div style="width:470px;flex:none">
-      <div class="tile step"><div class="e">🛡️</div><b>Выключи геометки в камере</b>
-        <div class="menu">🍏 <b>iPhone:</b> Настройки → Конфиденциальность и безопасность → Службы геолокации → Камера → <b>Никогда</b></div>
-        <div class="menu">🤖 <b>Android:</b> Камера → ⚙️ → «Сохранять местоположение» / «Теги местоположения» → <b>выкл.</b></div>
-        <div class="menu">📤 <b>Перед отправкой с iPhone:</b> Поделиться → Параметры → выключить «Геопозиция»</div>
-      </div>
-      <div class="tile step" style="margin-top:10px;padding:10px 16px"><b style="margin-top:0">🧹 Отдаёшь или продаёшь телефон?</b><span>Удалить фото мало — сделай <b>сброс до заводских настроек</b>.</span></div>
+    <div class="col" style="display:grid;gap:10px">
+      <div class="card" style="padding:10px 16px"><p style="font-size:21px">1. Полное имя файла <b>клетка.pptx</b>:<br><span class="ans"><span class="mono">D:\Проекты\Биология\клетка.pptx</span></span></p></div>
+      <div class="card" style="padding:10px 16px"><p style="font-size:21px">2. Сколько папок нужно открыть, чтобы добраться до <b>эссе.docx</b>? <span class="ans"><span>2: Проекты → Английский</span></span></p></div>
+      <div class="card" style="padding:10px 16px"><p style="font-size:21px">3. Какой файл лежит прямо в корневом каталоге? <span class="ans"><span>список.txt</span></span></p></div>
+      <div class="card soft" style="padding:10px 16px"><p style="font-size:21px">⭐ Файл <b>торт.docx</b> переместили в папку <b>Английский</b>. Его новое полное имя:<br><span class="ans"><span class="mono">D:\Проекты\Английский\торт.docx</span></span></p></div>
     </div>
   </div>
 </div>
 </section>
 
+<!-- 15 -->
+<section class="slide" data-stage="7" data-note="Слева — собрать полное имя из перепутанных частей (первое — все, второе ⭐ — путь Android). Справа — переходы по папкам: «подняться на уровень вверх» = убрать из пути последнюю папку. "><div class="stagetag"><b>Этап 7</b> · Закрепление · 8 мин</div>
+<div class="inner">
+  <h2>Собери путь и прогуляйся по папкам</h2>
+  <div class="row" style="align-items:flex-start">
+    <div class="col card">
+      <h3>🧩 Собери полное имя</h3>
+      <div class="chips"><span>Химия</span><span>опыт.docx</span><span>C:</span><span>Учёба</span></div>
+      <p style="font-size:20px"><span class="ans"><span class="mono">C:\Учёба\Химия\опыт.docx</span></span></p>
+      <p style="font-size:19px;font-weight:800;margin-top:14px">⭐ А теперь путь на Android:</p>
+      <div class="chips"><span>Download</span><span>0</span><span>фото.jpg</span><span>storage</span><span>emulated</span></div>
+      <p style="font-size:20px"><span class="ans"><span class="mono">/storage/emulated/0/Download/фото.jpg</span></span></p>
+    </div>
+    <div class="col card">
+      <h3>🚶‍♀️ Переходы по папкам</h3>
+      <p style="font-size:20px">Ты в папке <code class="sg f">D:\Проекты\Биология</code></p>
+      <div class="move"><span class="e">⬆️</span>поднялась на уровень вверх → <span class="ans"><span class="mono">D:\Проекты</span></span></div>
+      <div class="move"><span class="e">📂</span>открыла папку Английский → <span class="ans"><span class="mono">D:\Проекты\Английский</span></span></div>
+      <div class="rule step" style="margin-top:12px;font-size:20px">Подняться на уровень вверх = <b>убрать</b> из пути последнюю папку.<br>Открыть папку = <b>дописать</b> её имя через <b>\</b></div>
+    </div>
+  </div>
+</div>
+</section>
 
+<!-- 16 -->
+<section class="slide" data-stage="8" data-note="Класс показывает «верно» (палец вверх) или «неверно» (палец вниз) в камеру или в чат, затем открываем ответ кликом."><div class="stagetag"><b>Этап 8</b> · Самопроверка · 3 мин</div>
+<div class="inner">
+  <h2>Верно или неверно?</h2>
+  <div style="display:grid;gap:10px">
+    <div class="card" style="padding:11px 20px"><p style="font-size:22px">1. Расширение подсказывает, какой программой открыть файл. <span class="ans"><span>Верно</span></span></p></div>
+    <div class="card" style="padding:11px 20px"><p style="font-size:22px">2. В одной папке могут лежать два файла с одинаковым именем. <span class="ans bad"><span>Неверно</span></span></p></div>
+    <div class="card" style="padding:11px 20px"><p style="font-size:22px">3. В пути на Android папки разделяются знаком <code><b>\</b></code> <span class="ans bad"><span>Неверно: знаком /</span></span></p></div>
+    <div class="card" style="padding:11px 20px"><p style="font-size:22px">4. Файл <code><b>котик.jpg.exe</b></code> — это фотография. <span class="ans bad"><span>Неверно: это программа</span></span></p></div>
+    <div class="card" style="padding:11px 20px"><p style="font-size:22px">5. Если удалить ярлык, удалится и сам файл. <span class="ans bad"><span>Неверно: удалится только ссылка</span></span></p></div>
+  </div>
+</div>
+</section>
 
-<section class="slide" data-stage="6" data-note="Ссылку на практическую заранее положить в Umaclass. После практической — рефлексия и домашка (следующие слайды). Полная версия презентации с закреплением и самопроверкой лежит рядом: polnaya.html."><div class="stagetag"><b>Этап 6</b> · Практическая работа</div>
+<!-- 17 -->
+<section class="slide" data-stage="8" data-note="Ссылку на практическую заранее положить в Umaclass. Если практическая на этом же уроке, презентацию можно сократить: оставить слайды 1, 4–10 и 14 (кластеры и журнал — нужны для домашки) и сразу перейти сюда (≈ 14 минут)."><div class="stagetag"><b>Этап 8</b> · Практическая работа</div>
 <div class="inner">
   <h2>Практическая работа «Путь к файлу» 💻</h2>
   <p class="lead">Откройте ссылку в Umaclass — с компьютера или телефона. В конце работы отправьте отчёт.</p>
@@ -401,12 +521,13 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
     <div class="tile"><div class="e">🕵️‍♀️</div><b>Опасные файлы</b></div>
     <div class="tile"><div class="e">🧹</div><b>Наведи порядок</b></div>
     <div class="tile" style="background:#1d2346;border-color:#1d2346"><div class="e">⭐</div><b style="color:#fff">Бонус: маски</b></div>
-    <div class="tile" style="display:flex;align-items:center;justify-content:center"><a class="btn-o" href="../put-k-faylu/" target="_blank" rel="noopener" style="font-size:19px;padding:10px 16px">Открыть →</a></div>
+    <div class="tile" style="display:flex;align-items:center;justify-content:center"><a class="btn-o" href="../put-k-faylu/index.html" target="_blank" rel="noopener" style="font-size:19px;padding:10px 16px">Открыть →</a></div>
   </div>
 </div>
 </section>
 
-<section class="slide" data-stage="7" data-note="Каждая продолжает одну фразу вслух или в чат. Возвращаемся к плану урока."><div class="stagetag"><b>Этап 7</b> · Рефлексия · 2 мин</div>
+<!-- 18 -->
+<section class="slide" data-stage="9" data-note="Каждая продолжает одну фразу вслух или в чат. Возвращаемся к плану урока."><div class="stagetag"><b>Этап 9</b> · Рефлексия · 2 мин</div>
 <div class="inner">
   <h2>Продолжите фразу</h2>
   <div class="row">
@@ -428,7 +549,8 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
 </div>
 </section>
 
-<section class="slide" data-stage="8" data-note="Карточку с домашним заданием (картинку) выложить в Umaclass. Задания выполняются в тетради."><div class="stagetag"><b>Этап 8</b> · Домашнее задание · 1 мин</div>
+<!-- 19 -->
+<section class="slide" data-stage="10" data-note="Карточку с домашним заданием (картинку) выложить в Umaclass. Задания выполняются в тетради."><div class="stagetag"><b>Этап 10</b> · Домашнее задание · 1 мин</div>
 <div class="inner">
   <h2>Домашнее задание</h2>
   <div class="row" style="align-items:flex-start">
@@ -447,8 +569,7 @@ table.lg td:first-child{font-family:ui-monospace,Consolas,monospace;border-right
 <div id="notes"></div><div id="bar"></div>
 </div></div>
 
-<script type="application/json" id="speech">["<p>Ассаляму аляйкум, девочки! Проверяем: все меня слышат, всем виден экран? Если кто-то только подключился — напишите в чат «+».<\/p><p>Начнём урок, как обычно, с дуа. Повторяйте за мной: «Рабби зидни ‘ильман» — «Господи! Приумножь мои знания!» Это смысл 114 аята суры «Та-Ха».<\/p><p>Сегодня у нас тема, с которой вы сталкиваетесь каждый день, даже если не замечаете, — файловая система. К концу урока вы будете находить любой файл по его адресу — и на компьютере, и в телефоне.<\/p>", "<p>Представьте ситуацию. Я пишу вам в Umaclass: «Пришлите, пожалуйста, своё сочинение». Вы открываете на телефоне папку «Загрузки» — а там вот это. «Документ», «Документ (1)», «Документ (2)», «Новый документ», «сочинение_финал2»… И ещё двести файлов ниже. Какой из них нужный?<\/p><p>Напишите в чат или поднимите руку: у кого в «Загрузках» так же? <i class=\"dir\">(Обычно у всех — это хорошо разряжает обстановку.)<\/i><\/p><p><span class=\"clk\">▶ клик<\/span> А теперь вопрос. Компьютер ведь никогда не путает файлы: если попросить его открыть конкретный файл, он откроет именно его. Как он их различает? <i class=\"dir\">(Выслушать 1–2 ответа: по имени, по дате…)<\/i><\/p><p><span class=\"clk\">▶ клик<\/span> У каждого файла есть точный адрес — как у дома. Почтальон не путает квартиры, потому что знает город, улицу и дом. Вот и мы сегодня научимся читать и записывать адрес файла.<\/p>", "<p>Записываем тему урока: «Файловая система компьютера».<\/p><p>План такой. Сначала разберёмся, что такое файл и зачем ему расширение. Потом — папки и дерево папок. Дальше самое главное — путь к файлу. Затем маски — как быстро найти нужные файлы среди сотен. Посмотрим, как файловая система хранит и бережёт файлы. И в конце — лайфхаки и безопасность, это вам точно пригодится в жизни.<\/p><p>К концу урока вы сможете записать полный путь к любому файлу, найти файл по пути и посчитать, сколько места он займёт на диске. А после теории — практическая работа «Путь к файлу».<\/p>", "<p>Начнём с простого. Всё, что хранится у вас в телефоне или компьютере — фото, видео, документы, игры, — это файлы.<\/p><p>Записываем определение: <b>файл — это данные на диске, у которых есть имя.<\/b><\/p><p>Посмотрите на имя «сочинение.docx». Оно состоит из двух частей, между ними точка. Слева — само имя, его придумываем мы. Справа — <b>расширение<\/b>, оно показывает тип файла.<\/p><p><span class=\"clk\">▶ клик<\/span> Зачем нужно расширение? По нему компьютер понимает, какой программой открыть файл: docx откроет Word, jpg — галерея. И важно: расширение — это то, что после <b>последней<\/b> точки.<\/p><p>Теперь игра. Справа шесть расширений. Я называю — вы угадываете, что внутри. <i class=\"dir\">(Нажимать на карточки по одной, после ответов.)<\/i> .jpg — фото. .mp4 — видео. .pdf — документ. .pptx — презентация, вот как эта. А вот две красные: .exe — программа для Windows, .apk — установщик приложения для Android. Это уже не просто файлы, а программы, которые запускаются. С ними нужно быть осторожными.<\/p>", "<p>Если бы все файлы лежали в одной куче, мы бы ничего не нашли. Поэтому их раскладывают по папкам.<\/p><p>Представьте шкаф. В шкафу полки, на полке коробки, в коробке — шарф. Чтобы найти шарф, вы не перерываете весь дом: открываете шкаф, нужную полку, нужную коробку. В компьютере то же самое: диск, в нём папка, в ней ещё папка, а там файл.<\/p><p><span class=\"clk\">▶ клик<\/span> Записываем: <b>папка, или каталог, — это место, где лежат файлы и другие папки.<\/b> Самая главная папка диска, с которой всё начинается, — <b>корневой каталог<\/b>. На компьютере это, например, C:.<\/p><p><span class=\"clk\">▶ клик<\/span> Посмотрите на картинку справа. Папки вложены друг в друга, и получается <b>дерево<\/b>. Только перевёрнутое: корень сверху, а «ветки» растут вниз. Корень — C:. В нём папка Учёба, внутри неё вложенная папка Химия, а в Химии лежит файл опыт.docx.<\/p><p>И ещё одно определение: <b>порядок, по которому операционная система хранит и называет файлы, — это и есть файловая система.<\/b> Это тема нашего урока.<\/p>", "<p>Теперь самое главное на сегодня. Помните, мы говорили, что у файла есть адрес? Сравним с адресом дома. Как пишут адрес на посылке? Россия — Казань — улица Мира — дом 5. От большого к маленькому.<\/p><p>Адрес файла пишется точно так же: C: — Учёба — Химия — опыт.docx. Сначала диск, потом папки по порядку, в конце — сам файл. Между частями — знак «обратная косая черта».<\/p><p><span class=\"clk\">▶ клик<\/span> Записываем два определения. <b>Путь — это цепочка папок от корня до файла. Полное имя файла — это путь плюс имя файла.<\/b> Именно по полному имени компьютер никогда не путает файлы.<\/p><p><span class=\"clk\">▶ клик<\/span> Сейчас покажу на дереве. <span class=\"clk\">▶ клик<\/span> <i class=\"dir\">(Нажать на горы.jpg.)<\/i> Смотрите: подсветились все папки, через которые мы идём к файлу, а внизу собралось полное имя — C:\\Фото\\Каникулы\\горы.jpg. Синим — диск, оранжевым — папки, зелёным — имя, красным — расширение.<\/p><p>Теперь вы. <i class=\"dir\">(Вызвать 2–3 учениц, ответ проверять кликом по файлу.)<\/i> Назовите полное имя файла доклад.pptx. — C:\\Учёба\\История\\доклад.pptx. А файла заметки.txt? — C:\\заметки.txt: он лежит прямо в корне, папок в пути нет.<\/p>", "<p>Многие из вас сейчас сидят с телефона. Давайте посмотрим, как выглядит путь на разных устройствах. Возьмём одно и то же фото.<\/p><p>В Windows: C:\\Users\\Аня\\Downloads\\фото.jpg. Начинается с буквы диска. Кстати, у флешки тоже будет своя буква — обычно E: или F:.<\/p><p>На Android: /storage/emulated/0/Download/фото.jpg. Букв дисков нет. То, что в телефоне называется «Внутренняя память», — это /storage/emulated/0.<\/p><p>На Mac: /Users/anya/Downloads/фото.jpg. А iPhone показывает совсем просто: «На iPhone › Загрузки».<\/p><p><span class=\"clk\">▶ клик<\/span> Заметили разницу в чёрточках? Записываем: <b>в Windows папки разделяет обратная косая черта<\/b> — она наклонена влево. <b>В Android, macOS и Linux — обычная косая черта<\/b>, наклонена вправо.<\/p><p><span class=\"clk\">▶ клик<\/span> Как запомнить обычную черту? Вы её видите каждый день в адресах сайтов: site.ru/news/2026. Это тоже путь — только к странице на сервере.<\/p><p>На практической вы найдёте настоящий путь к файлу на своём устройстве.<\/p>", "<p>Теперь — маски. Это способ быстро найти нужные файлы.<\/p><p>Представьте: в папке тысяча файлов, а вам нужны только фотографии. Перебирать вручную долго. Для этого есть <b>маски<\/b> — шаблоны, по которым компьютер отбирает файлы.<\/p><p>В масках два специальных символа. <b>Звёздочка<\/b> заменяет любое количество любых символов — хоть десять, хоть один, хоть ни одного. <b>Вопросительный знак<\/b> заменяет ровно один любой символ. Кстати, поэтому эти знаки и нельзя ставить в имя файла — они заняты.<\/p><p><span class=\"clk\">▶ клик<\/span> Что найдёт маска *.jpg? — Все файлы с расширением jpg: звёздочка — любое имя. <span class=\"clk\">▶ клик<\/span> А маска отчёт*.*? — Все файлы, имя которых начинается на «отчёт», с любым расширением.<\/p><p>Проверим себя: маска к?т.txt. Вопросительный знак — ровно одна буква. <span class=\"clk\">▶ клик<\/span> кот.txt — подходит. <span class=\"clk\">▶ клик<\/span> кит.txt — подходит. <span class=\"clk\">▶ клик<\/span> кнут.txt — нет: между «к» и «т» две буквы, а знак вопроса заменяет только одну. <span class=\"clk\">▶ клик<\/span> кт.txt — нет: там ни одной буквы, а нужна ровно одна. <span class=\"clk\">▶ клик<\/span> кот.docx — нет: расширение другое.<\/p><p><span class=\"clk\">▶ клик<\/span> И лайфхак: в поиске Проводника введите *.pdf — и он покажет все PDF в папке.<\/p>", "<p>Ещё две вещи, которые файловая система делает незаметно для нас. Они понадобятся в домашнем задании.<\/p><p>Первая — <b>кластеры<\/b>. Память диска поделена на одинаковые кусочки, как шоколадка на дольки. Эти кусочки называются кластеры. Правило: <b>файл занимает только целое число кластеров.<\/b> Даже если ему нужно совсем чуть-чуть от следующего кластера, он занимает его целиком.<\/p><p>Пример: кластер 4 КБ, файл 10 КБ. Два кластера заполнены полностью — это 8 КБ. Остались 2 КБ — для них нужен третий кластер, и он заполнен наполовину. Сколько места займёт файл? <span class=\"clk\">▶ клик<\/span> Три кластера, то есть 12 КБ, хотя сам файл весит 10.<\/p><p><span class=\"clk\">▶ клик<\/span> Поэтому, если открыть «Свойства» файла на компьютере, там две строки — «Размер» и «На диске», — и числа в них разные. Посмотрите дома.<\/p><p>Вторая — <b>журнал изменений<\/b>. Файловая система записывает каждое действие с файлами: создали, переименовали, удалили. Зачем? Представьте: вы сохраняете файл, и тут выключили свет. Без журнала диск мог бы «запутаться» — файл сломан, папка не открывается. А с журналом файловая система после включения смотрит, что не успела доделать, и наводит порядок. Важно: это защита от поломки, а не «машина времени» — старые версии файла журнал не хранит.<\/p><p>Читаем журнал сверху вниз, как историю. Создали кот.txt. Переименовали: старое имя кот.txt, новое — пёс.txt. Создали луна.png. Удалили луна.png. Что осталось на диске? <span class=\"clk\">▶ клик<\/span> Только пёс.txt.<\/p>", "<p>А теперь то, что пригодится вам прямо сегодня, — лайфхаки. Кто сейчас за компьютером — можете пробовать сразу.<\/p><p><b>Ctrl + Z.<\/b> Случайно удалили не тот файл или перетащили не в ту папку? Сразу нажмите Ctrl + Z — Проводник отменит последнее действие.<\/p><p><b>F2.<\/b> Выделили файл, нажали F2 — и сразу вводите новое имя, без всяких меню.<\/p><p><b>Win + E<\/b> — Проводник за секунду. Win — это клавиша с окошком.<\/p><p><b>Win + PrtSc<\/b> — скриншот всего экрана сразу сохраняется файлом. Где его искать? В папке «Изображения», внутри — «Снимки экрана». Вот вам и путь к файлу.<\/p><p><b>Что съело память в телефоне?<\/b> На iPhone: Настройки — Основные — Хранилище iPhone. На Android: Настройки — Хранилище. Там видно, что занимает больше всего места.<\/p><p>А теперь осторожно: <b>Shift + Delete<\/b> удаляет файл мимо корзины. Вернуть его уже не получится. Пользуйтесь, только если точно уверены.<\/p><p><span class=\"clk\">▶ клик<\/span> На телефоне всё то же самое: зажмите файл пальцем в приложении «Файлы» — появится меню «Переименовать», «Переместить», «Удалить», «Поделиться».<\/p>", "<p>Последняя тема — безопасность. Вопрос: может ли обычная фотография рассказать незнакомому человеку, где вы живёте? <i class=\"dir\">(Выслушать ответы.)<\/i><\/p><p>Оказывается, может. Внутри файла фото, кроме самой картинки, спрятаны скрытые данные: когда сделан снимок, на какой телефон и часто — <b>координаты<\/b> места. На улице — с точностью до нескольких метров. На самой фотографии этого не видно, а в файле есть.<\/p><p><span class=\"clk\">▶ клик<\/span> Поднимите руку: кто отправлял фото в Telegram или WhatsApp «как файл», чтобы не портилось качество? Вот здесь ловушка. Когда отправляете обычным способом, «как фото», мессенджер сжимает снимок и убирает координаты. А когда «как файл» — координаты уходят вместе с ним.<\/p><p><span class=\"clk\">▶ клик<\/span> Получается: фото у дома или у школы плюс координаты — это ваш адрес у незнакомого человека.<\/p><p><span class=\"clk\">▶ клик<\/span> Как защититься? Выключите геометки в камере. На iPhone: Настройки — Конфиденциальность и безопасность — Службы геолокации — Камера — «Никогда». На Android: откройте камеру, шестерёнку настроек, найдите «Сохранять местоположение» или «Теги местоположения» и выключите. А на iPhone можно убрать геопозицию прямо перед отправкой: «Поделиться» — «Параметры» — выключить «Геопозиция». Кто хочет — можете сделать это прямо сейчас.<\/p><p><span class=\"clk\">▶ клик<\/span> И ещё: если отдаёте или продаёте телефон, просто удалить фото мало. Сделайте сброс до заводских настроек.<\/p>", "<p>Теория закончилась — переходим к практике. Откройте ссылку на практическую работу «Путь к файлу» в Umaclass. Можно с компьютера или с телефона — работа сама подстраивается под устройство.<\/p><p>Что там будет: соберёте адрес файла, поработаете с деревом папок, найдёте настоящие пути на своём устройстве, поучитесь правильно называть файлы, разберётесь с опасными файлами и наведёте порядок в папках. Для тех, кто справится быстро, есть бонус — маски.<\/p><p>В конце работы нажмите кнопку отчёта и отправьте его мне в Umaclass. Если что-то не открывается или непонятно — пишите в чат, я помогу.<\/p>", "<p>Давайте подведём итог. Я читаю начало фразы — продолжите её вслух или в чат. Каждая выбирает одну фразу.<\/p><p>«Путь к файлу — это…» <i class=\"dir\">(цепочка папок от корня до файла)<\/i>. «В Windows папки разделяет …, а в телефоне …» <i class=\"dir\">(обратная косая черта и обычная косая черта)<\/i>. «Теперь я не открою файл, если…» <i class=\"dir\">(расширение exe или apk, прислал незнакомец)<\/i>. «Самым трудным сегодня было…»<\/p><p>Справа — то, что нужно запомнить: файл — это имя плюс расширение; корень, папки и файлы образуют дерево; полное имя — это путь плюс имя файла; в Windows — обратная черта, в Android и macOS — обычная; и всегда смотрим на последнее расширение.<\/p><p>Вернёмся к плану урока — всё, что запланировали, мы прошли.<\/p>", "<p>Домашнее задание — карточка в Umaclass. В ней три задания.<\/p><p>Первое — посчитать, сколько кластеров займёт каждый файл. Помните правило: если размер не делится на размер кластера нацело — округляем вверх.<\/p><p>Второе — прочитать журнал изменений и написать, какие файлы остались. Читайте строго сверху вниз и следите за переименованиями: у файла может поменяться имя.<\/p><p>Третье — составить журнал изменений самим по описанию.<\/p><p>Если что-то будет непонятно — пишите мне. Спасибо за урок!<\/p>"]</script>
-<script type="application/json" id="stages">[["Оргмомент",1],["Мотивация",2],["Тема и цель",1],["Теория",12],["Лайфхаки",5],["Практическая",35],["Рефлексия",2],["Домашнее задание",1]]</script>
+<script type="application/json" id="stages">[["Оргмомент",1],["Актуализация",3],["Мотивация",2],["Тема и цель",1],["Новое знание",15],["Физминутка",2],["Закрепление",8],["Самопроверка",3],["Рефлексия",2],["Домашнее задание",1]]</script>
 <script>
 var $=function(s,el){return (el||document).querySelector(s);};
 var $$=function(s,el){return Array.prototype.slice.call((el||document).querySelectorAll(s));};
@@ -510,60 +631,6 @@ $$(".tree").forEach(function(box){
 $$(".tcard").forEach(function(b){b.onclick=function(){b.classList.add("open");};});
 
 /* ===== Навигация ===== */
-/* ===== Окно докладчика ===== */
-var SPEECH=[];try{SPEECH=JSON.parse(document.getElementById("speech").textContent);}catch(e){}
-var pw=null,lessonStart=null,pFont=21;
-function slideTitle(i){var sl=slides[i];if(!sl)return "конец";var h=sl.querySelector("h2,h1");return h?h.textContent.replace(/\s+/g," ").trim():"—";}
-function openPresenter(){
-  try{pw=window.open("","presenter","width=1000,height=760");}catch(e){pw=null;}
-  if(!pw){notes.innerHTML="<b>Окно докладчика заблокировано браузером.</b> Разрешите всплывающие окна для этого сайта (значок в адресной строке) и нажмите 🎤 ещё раз.";notes.classList.add("on");return;}
-  if(!lessonStart)lessonStart=Date.now();
-  var d=pw.document;d.open();
-  d.write('<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><title>Докладчик · Файловая система</title><style>'+
-  'body{margin:0;font-family:Nunito,"Segoe UI",Arial,sans-serif;background:#1d2346;color:#fff}'+
-  '.top{display:flex;align-items:center;gap:10px;padding:12px 18px;background:#141a36;position:sticky;top:0;flex-wrap:wrap}'+
-  '.top button{border:none;border-radius:10px;background:#f58a27;color:#fff;font:inherit;font-weight:800;font-size:18px;padding:8px 16px;cursor:pointer}'+
-  '.top button.g{background:#2c3563}.num{font-weight:800;font-size:20px}.stg{color:#f9b26f;font-weight:700}'+
-  '.tm{margin-left:auto;font-variant-numeric:tabular-nums;font-size:22px;font-weight:800;background:#2c3563;border-radius:10px;padding:6px 12px;cursor:pointer}'+
-  '.ttl{padding:14px 22px 0;font-size:26px;font-weight:800}.left{padding:4px 22px 0;color:#9fb0d8;font-size:16px}'+
-  '#txt{padding:10px 22px 30px;line-height:1.5}#txt p{margin:0 0 14px}'+
-  '.clk{display:inline-block;background:#f58a27;color:#fff;font-weight:800;font-size:.7em;border-radius:999px;padding:2px 10px;vertical-align:2px;margin-right:4px}'+
-  '.dir{color:#9fb0d8}b{color:#ffd38a}'+
-  '.nx{margin:0 22px 24px;padding:10px 14px;border-radius:12px;background:#2c3563;color:#c9d3f0;font-size:16px}'+
-  '.hint{padding:0 22px 20px;color:#7d89b5;font-size:14px}'+
-  '</style></head><body><div class="top"><button class="g" id="pv">‹ Назад</button><button id="nx">Дальше ›</button><span class="num" id="num"></span><span class="stg" id="stg"></span>'+
-  '<button class="g" id="am">A−</button><button class="g" id="ap">A+</button><span class="tm" id="tm" title="Нажмите, чтобы сбросить">00:00</span></div>'+
-  '<div class="ttl" id="ttl"></div><div class="left" id="left"></div><div id="txt"></div><div class="nx" id="nxt"></div>'+
-  '<div class="hint">Это окно видите только вы. В LiveDigital демонстрируйте вкладку или окно с презентацией, а не весь экран. Стрелки и пробел работают и здесь.</div></body></html>');
-  d.close();
-  var w=pw;
-  d.getElementById("pv").onclick=function(){prev();};
-  d.getElementById("nx").onclick=function(){next();};
-  d.getElementById("am").onclick=function(){pFont=Math.max(14,pFont-2);updPresenter();};
-  d.getElementById("ap").onclick=function(){pFont=Math.min(40,pFont+2);updPresenter();};
-  d.getElementById("tm").onclick=function(){lessonStart=Date.now();};
-  d.addEventListener("keydown",function(e){
-    if(["ArrowRight","PageDown"," ","Enter"].indexOf(e.key)>=0){e.preventDefault();next();}
-    else if(["ArrowLeft","PageUp","Backspace"].indexOf(e.key)>=0){e.preventDefault();prev();}});
-  w.setInterval(function(){if(!lessonStart)return;var t=Math.floor((Date.now()-lessonStart)/1000);
-    var el=w.document.getElementById("tm");if(el)el.textContent=String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0");},1000);
-  updPresenter();
-  try{w.focus();}catch(e){}
-}
-function updPresenter(){
-  if(!pw||pw.closed)return;
-  try{
-    var d=pw.document,sl=slides[cur];if(!d.getElementById("txt"))return;
-    d.getElementById("num").textContent="Слайд "+(cur+1)+" / "+slides.length;
-    var st=stages[(+sl.dataset.stage)-1];d.getElementById("stg").textContent=st?st[0]:"";
-    d.getElementById("ttl").textContent=slideTitle(cur);
-    var left=sl.querySelectorAll(".step:not(.shown),.ans:not(.shown)").length;
-    d.getElementById("left").textContent=left?("Скрыто на слайде: "+left+" — открываются по клику"):"Всё на слайде открыто — следующий клик перейдёт дальше";
-    var tx=d.getElementById("txt");tx.innerHTML=SPEECH[cur]||sl.dataset.note||"";tx.style.fontSize=pFont+"px";
-    d.getElementById("nxt").textContent=cur<slides.length-1?("Следующий слайд: "+slideTitle(cur+1)):"Это последний слайд";
-  }catch(e){}
-}
-
 var deck=$("#deck"),slides=$$(".slide"),bar=$("#bar"),notes=$("#notes"),cur=0;
 function fit(){var s=Math.min(innerWidth/1280,innerHeight/720);deck.style.transform="scale("+s+")";}
 addEventListener("resize",fit);fit();
@@ -573,7 +640,7 @@ var stEls=stages.map(function(s,i){var d=document.createElement("div");d.classNa
   d.onclick=function(){for(var k=0;k<slides.length;k++){if(+slides[k].dataset.stage===i+1){go(k,"all");return;}}};return d;});
 function mk(t,f,ti){var b=document.createElement("button");b.className="nb";b.textContent=t;b.onclick=f;if(ti)b.title=ti;return b;}
 var cnt=document.createElement("div");cnt.className="cnt";
-[mk("‹",function(){prev();},"Назад (←)")].concat(stEls,[cnt,mk("✎",function(){notes.classList.toggle("on");},"Заметки учителю (N)"),mk("🎤",function(){openPresenter();},"Окно докладчика с текстом (P)"),mk("›",function(){next();},"Дальше (→ или пробел)")]).forEach(function(el){bar.appendChild(el);});
+[mk("‹",function(){prev();},"Назад (←)")].concat(stEls,[cnt,mk("✎",function(){notes.classList.toggle("on");},"Заметки учителю (N)"),mk("›",function(){next();},"Дальше (→ или пробел)")]).forEach(function(el){bar.appendChild(el);});
 function go(k,mode){
   slides[cur].classList.remove("active");cur=Math.max(0,Math.min(slides.length-1,k));
   var s=slides[cur];s.classList.add("active");
@@ -581,17 +648,16 @@ function go(k,mode){
   $$(".tcard",s).forEach(function(e){e.classList.toggle("open",mode==="all");});
   var stg=+s.dataset.stage;stEls.forEach(function(e,i){e.classList.toggle("cur",i+1===stg);e.classList.toggle("done",i+1<stg);});
   cnt.textContent=(cur+1)+" / "+slides.length;
-  notes.innerHTML=SPEECH[cur]||("<b>Учителю:</b> "+(s.dataset.note||"—"));updPresenter();
+  notes.innerHTML="<b>Учителю:</b> "+(s.dataset.note||"—");
   try{history.replaceState(null,"","#"+(cur+1));}catch(e){}
 }
-function next(){var s=slides[cur],h=s.querySelector(".step:not(.shown),.ans:not(.shown)");if(h){h.classList.add("shown");updPresenter();return;}if(cur<slides.length-1)go(cur+1);}
+function next(){var s=slides[cur],h=s.querySelector(".step:not(.shown),.ans:not(.shown)");if(h){h.classList.add("shown");return;}if(cur<slides.length-1)go(cur+1);}
 function prev(){if(cur>0)go(cur-1,"all");}
 addEventListener("keydown",function(e){
   if(["ArrowRight","PageDown"," ","Enter"].indexOf(e.key)>=0){e.preventDefault();next();}
   else if(["ArrowLeft","PageUp","Backspace"].indexOf(e.key)>=0){e.preventDefault();prev();}
   else if(e.key.length===1&&"fFаА".indexOf(e.key)>=0){if(document.fullscreenElement){document.exitFullscreen();}else if(document.documentElement.requestFullscreen){var r=document.documentElement.requestFullscreen();if(r&&r.catch)r.catch(function(){});}}
   else if(e.key.length===1&&"nNтТ".indexOf(e.key)>=0){notes.classList.toggle("on");}
-  else if(e.key.length===1&&"pPзЗ".indexOf(e.key)>=0){openPresenter();}
   else if(e.key==="Home"){go(0);}
 });
 document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest(".ans");if(a)a.classList.add("shown");});
